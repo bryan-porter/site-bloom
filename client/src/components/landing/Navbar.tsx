@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { Button } from "./Button";
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { label: "Product", href: "#product" },
@@ -13,7 +13,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100" data-testid="navbar">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
@@ -36,22 +36,24 @@ export function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="text" data-testid="button-signin">
+            <Button variant="ghost" data-testid="button-signin">
               Sign In
             </Button>
-            <Button variant="primary" size="md" data-testid="button-demo">
+            <Button className="rounded-full bg-[#FF5A30] border-[#E54D26]" data-testid="button-demo">
               Book a Demo
             </Button>
           </div>
 
-          <button
-            className="md:hidden p-2 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
             onClick={() => setIsOpen(!isOpen)}
             data-testid="button-mobile-menu"
             aria-label="Toggle mobile menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -62,6 +64,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-white border-b border-slate-100"
+            data-testid="mobile-menu"
           >
             <div className="px-4 py-4 space-y-3">
               {navLinks.map((link) => (
@@ -79,7 +82,7 @@ export function Navbar() {
                 <Button variant="ghost" className="w-full justify-center" data-testid="button-mobile-signin">
                   Sign In
                 </Button>
-                <Button variant="primary" className="w-full justify-center" data-testid="button-mobile-demo">
+                <Button className="w-full justify-center rounded-full bg-[#FF5A30] border-[#E54D26]" data-testid="button-mobile-demo">
                   Book a Demo
                 </Button>
               </div>

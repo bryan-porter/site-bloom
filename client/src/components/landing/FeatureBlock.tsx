@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Button } from "./Button";
+import { Button } from "@/components/ui/button";
 
 interface FeatureBlockProps {
   title: string;
@@ -25,6 +25,7 @@ export function FeatureBlock({
       transition={{ duration: 0.6, delay: 0.1 }}
       viewport={{ once: true, margin: "-100px" }}
       className={`flex flex-col ${isImageLeft ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-8 lg:gap-16`}
+      data-testid={`container-feature-${index}`}
     >
       <div className="flex-1 max-w-xl">
         <motion.div
@@ -33,16 +34,25 @@ export function FeatureBlock({
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <span className="inline-block text-[#FF5A30] font-semibold text-sm uppercase tracking-wider mb-3">
+          <span 
+            className="inline-block text-[#FF5A30] font-semibold text-sm uppercase tracking-wider mb-3"
+            data-testid={`text-feature-label-${index}`}
+          >
             Feature {index + 1}
           </span>
-          <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight">
+          <h3 
+            className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight"
+            data-testid={`text-feature-title-${index}`}
+          >
             {title}
           </h3>
-          <p className="text-lg text-slate-600 mb-6 leading-relaxed">
+          <p 
+            className="text-lg text-slate-600 mb-6 leading-relaxed"
+            data-testid={`text-feature-description-${index}`}
+          >
             {description}
           </p>
-          <Button variant="primary" size="md" data-testid={`button-feature-cta-${index}`}>
+          <Button className="rounded-full bg-[#FF5A30] border-[#E54D26]" data-testid={`button-feature-cta-${index}`}>
             {ctaText}
           </Button>
         </motion.div>
@@ -55,6 +65,7 @@ export function FeatureBlock({
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true }}
           className="aspect-[4/3] bg-gradient-to-br from-slate-100 to-slate-200 rounded-3xl flex items-center justify-center relative overflow-hidden"
+          data-testid={`image-feature-placeholder-${index}`}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-[#FF5A30]/5 to-orange-100/20"></div>
           <div className="relative z-10">
@@ -90,7 +101,7 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white" id="product">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white" id="product" data-testid="section-features">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -99,10 +110,13 @@ export function FeaturesSection() {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
+          <h2 
+            className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight"
+            data-testid="text-features-heading"
+          >
             Everything you need to recruit smarter
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto" data-testid="text-features-subheading">
             Our AI-powered platform gives you the tools to find, engage, and hire top talent faster than ever.
           </p>
         </motion.div>

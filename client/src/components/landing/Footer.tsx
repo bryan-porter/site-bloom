@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Button } from "./Button";
+import { Button } from "@/components/ui/button";
 
 const footerLinks = {
   Product: ["Search", "CRM", "Agents", "Insights", "Integrations"],
@@ -11,42 +11,55 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="bg-slate-900" id="company">
+    <footer className="bg-slate-900" id="company" data-testid="footer">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
         className="py-20 px-4 sm:px-6 lg:px-8 border-b border-slate-800"
+        data-testid="container-footer-cta"
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+          <h2 
+            className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight"
+            data-testid="text-footer-cta-heading"
+          >
             The future of recruiting<br />starts with Juicebox.
           </h2>
-          <p className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
+          <p 
+            className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto"
+            data-testid="text-footer-cta-subheading"
+          >
             Join thousands of recruiting teams who are already using AI to find better candidates faster.
           </p>
-          <Button variant="primary" size="lg" data-testid="button-footer-cta">
+          <Button size="lg" className="rounded-full bg-[#FF5A30] border-[#E54D26]" data-testid="button-footer-cta">
             Get Started
           </Button>
         </div>
       </motion.div>
 
-      <div className="py-16 px-4 sm:px-6 lg:px-8">
+      <div className="py-16 px-4 sm:px-6 lg:px-8" data-testid="container-footer-links">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-12">
             <div className="col-span-2 md:col-span-3 lg:col-span-1">
               <a href="/" className="text-2xl font-bold text-white tracking-tight" data-testid="link-footer-logo">
                 Juicebox
               </a>
-              <p className="mt-4 text-slate-400 text-sm leading-relaxed">
+              <p 
+                className="mt-4 text-slate-400 text-sm leading-relaxed"
+                data-testid="text-footer-tagline"
+              >
                 The AI Recruiting Platform that helps you win the talent war.
               </p>
             </div>
 
             {Object.entries(footerLinks).map(([category, links]) => (
-              <div key={category}>
-                <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+              <div key={category} data-testid={`container-footer-column-${category.toLowerCase()}`}>
+                <h3 
+                  className="text-sm font-semibold text-white uppercase tracking-wider mb-4"
+                  data-testid={`text-footer-category-${category.toLowerCase()}`}
+                >
                   {category}
                 </h3>
                 <ul className="space-y-3">
@@ -67,21 +80,24 @@ export function Footer() {
           </div>
 
           <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-slate-500 text-sm">
+            <p 
+              className="text-slate-500 text-sm"
+              data-testid="text-footer-copyright"
+            >
               © 2025 Juicebox. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
               <a
                 href="#privacy"
                 className="text-slate-500 hover:text-white transition-colors text-sm"
-                data-testid="link-footer-privacy"
+                data-testid="link-footer-privacy-bottom"
               >
                 Privacy
               </a>
               <a
                 href="#terms"
                 className="text-slate-500 hover:text-white transition-colors text-sm"
-                data-testid="link-footer-terms"
+                data-testid="link-footer-terms-bottom"
               >
                 Terms
               </a>

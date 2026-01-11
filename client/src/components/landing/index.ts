@@ -6,4 +6,3 @@ export { AgentsGrid } from "./AgentsGrid";
 export { Testimonials } from "./Testimonials";
 export { FAQ } from "./FAQ";
 export { Footer } from "./Footer";
-export { Button } from "./Button";
