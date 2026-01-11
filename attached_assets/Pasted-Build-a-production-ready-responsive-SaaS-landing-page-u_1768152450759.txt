@@ -1,0 +1,86 @@
+Build a production-ready, responsive SaaS landing page using **React (Vite)**, **Tailwind CSS**, **Framer Motion**, and **Lucide-React**.
+
+The design must replicate the structure and premium feel of **Juicebox.ai**.
+
+### **1. Technical Constraints & Design System**
+* **Framework:** React with Vite.
+* **Styling:** Tailwind CSS. Use `slate-50` or `zinc-50` for light backgrounds and `slate-900` for text.
+* **Accent Color:** Use a vibrant Orange/Coral (approx `#FF5A30`) for primary buttons and highlights.
+* **Icons:** Use `lucide-react`.
+* **Animations:** Use `framer-motion` for subtle fade-ins on scroll (opacity: 0 y: 20 -> opacity: 1 y: 0) and hover effects on cards.
+* **Typography:** Use a clean sans-serif (Inter defaults).
+* **Radius:** Use `rounded-2xl` for cards and `rounded-full` for buttons.
+
+### **2. Desired File Structure**
+Please organize the code into these specific components inside a `/src/components` folder:
+* `Navbar.tsx`
+* `Hero.tsx`
+* `SocialProof.tsx` (Logos)
+* `FeatureBlock.tsx` (Reusable component for alternating features)
+* `AgentsGrid.tsx`
+* `Testimonials.tsx`
+* `FAQ.tsx`
+* `Footer.tsx`
+* `Button.tsx` (Reusable UI component)
+
+### **3. Detailed Section Requirements (In Order)**
+
+**1. Sticky Navbar (`Navbar.tsx`)**
+* Fixed top, `backdrop-blur-md`, `bg-white/80`, `z-50`.
+* **Left:** Text logo "Juicebox" (Bold, tracking-tight).
+* **Right:** Links (Product, Resources, Company), "Sign In" (text), "Book a Demo" (Orange Pill Button).
+* **Mobile:** Hamburger menu that opens a drawer.
+
+**2. Hero Section (`Hero.tsx`)**
+* Centered layout, max-width-5xl.
+* **Top Badge:** Pill shape, gray bg, text: "New: Try Juicebox Agents".
+* **Headline:** Huge (text-5xl md:text-7xl), Bold, Tight leading: "Win the talent war."
+* **Subhead:** "Juicebox is the AI Recruiting Platform that understands who you're looking for. Level up your team with Search, CRM, and Agents."
+* **Buttons:** Row with "Try for Free" (Primary Orange) and "Book a Demo" (Outline).
+* **Visual Mock:** A large container below the text resembling a chat interface.
+    * Input field: "Who are you looking for? e.g. Software Engineers in SF..."
+    * **Floating Elements:** Below the input, position 3 "Candidate Cards" using absolute positioning or a grid. Each card needs a dummy avatar, Name (e.g., Dean Wiegand), Role (Senior Engineer), and pill tags (Python, React). Give these cards a slight float animation.
+
+**3. Value Prop Bar**
+* Simple centered text: "Recruiting is being rewritten. AI-led, precision-driven, and built for teams that demand speed and results."
+
+**4. Features Section (Alternating Layout)**
+* Use the `FeatureBlock` component 3 times.
+* **Layout:** Text on Left/Image Right -> Image Left/Text Right -> Text Left/Image Right.
+* **Block 1 (Search):** "Search & CRM". Desc: "Talent discovery across 800M+ profiles." CTA: "Try AI Talent Search".
+* **Block 2 (Insights):** "Insights". Desc: "Real-time insights for every talent pool." CTA: "Try AI Talent Insights".
+* **Block 3 (Engagement):** "Engagement". Desc: "Boost replies with automated outreach." CTA: "Try AI Sequencing".
+* *Note: Use gray rounded rectangles as placeholders for images.*
+
+**5. AI Agents Grid (`AgentsGrid.tsx`)**
+* Title: "Deploy AI Agents for every recruiter".
+* 3-Column Grid.
+* **Cards:** White bg, heavy shadow-sm, hover:shadow-xl transition.
+* Content: "AI Search" (Search on autopilot), "Agentic Learning" (Gets better with every hire), "Automated Outreach" (Outreach that feels personal).
+
+**6. Integrations (`SocialProof.tsx`)**
+* Title: "Integrates with tools you use".
+* Flex row, grayscale logos (use text placeholders like [Greenhouse], [Workday], [Gmail] styled as logos).
+
+**7. Testimonials (`Testimonials.tsx`)**
+* Title: "How top teams win with Juicebox".
+* Grid of 4 cards. Use distinct background colors (very light orange or light gray).
+* Headlines: "How CoinTracker Saves 30+ Hours", "How Monte Carlo Filled 2 Roles in 3 Weeks".
+
+**8. FAQ Section (`FAQ.tsx`)**
+* Two-column layout (Desktop).
+* **Left:** "Your questions, answered" + "Book a Demo" button.
+* **Right:** Accordion list (Use state to toggle open/close).
+* Questions: "Who can use Juicebox?", "Can I try for free?", "Global data coverage?".
+
+**9. Footer (`Footer.tsx`)**
+* **Top Callout:** Large dark section. Text: "The future of recruiting starts with Juicebox." Button: "Get Started".
+* **Links:** 5 columns (Product, Resources, Partners, Company, Security).
+* **Bottom:** Copyright 2025 Juicebox, Privacy, Terms.
+
+### **4. Execution Steps**
+1.  Initialize the Vite project.
+2.  Install `lucide-react`, `framer-motion`, and `clsx`.
+3.  Create the component folder structure.
+4.  Implement the components with dummy data.
+5.  Assemble them in `App.tsx`.
