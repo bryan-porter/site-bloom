@@ -1,136 +1,176 @@
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-
-interface FeatureBlockProps {
-  title: string;
-  description: string;
-  ctaText: string;
-  imagePosition?: "left" | "right";
-  index: number;
-}
-
-export function FeatureBlock({
-  title,
-  description,
-  ctaText,
-  imagePosition = "right",
-  index,
-}: FeatureBlockProps) {
-  const isImageLeft = imagePosition === "left";
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.1 }}
-      viewport={{ once: true, margin: "-100px" }}
-      className={`flex flex-col ${isImageLeft ? "lg:flex-row-reverse" : "lg:flex-row"} items-center gap-8 lg:gap-16`}
-      data-testid={`container-feature-${index}`}
-    >
-      <div className="flex-1 max-w-xl">
-        <motion.div
-          initial={{ opacity: 0, x: isImageLeft ? 20 : -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          <span 
-            className="inline-block text-[#FF5A30] font-semibold text-sm uppercase tracking-wider mb-3"
-            data-testid={`text-feature-label-${index}`}
-          >
-            Feature {index + 1}
-          </span>
-          <h3 
-            className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 tracking-tight"
-            data-testid={`text-feature-title-${index}`}
-          >
-            {title}
-          </h3>
-          <p 
-            className="text-lg text-slate-600 mb-6 leading-relaxed"
-            data-testid={`text-feature-description-${index}`}
-          >
-            {description}
-          </p>
-          <Button className="rounded-full bg-[#FF5A30] border-[#E54D26]" data-testid={`button-feature-cta-${index}`}>
-            {ctaText}
-          </Button>
-        </motion.div>
-      </div>
-
-      <div className="flex-1 w-full max-w-xl">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="aspect-[4/3] bg-gradient-to-br from-slate-100 to-slate-200 rounded-3xl flex items-center justify-center relative overflow-hidden"
-          data-testid={`image-feature-placeholder-${index}`}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#FF5A30]/5 to-orange-100/20"></div>
-          <div className="relative z-10">
-            <div className="w-32 h-32 rounded-2xl bg-white shadow-lg flex items-center justify-center">
-              <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#FF5A30] to-orange-400 opacity-80"></div>
-            </div>
-          </div>
-          <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-[#FF5A30]/10 rounded-full blur-2xl"></div>
-          <div className="absolute -top-6 -left-6 w-32 h-32 bg-orange-200/30 rounded-full blur-3xl"></div>
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-}
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search, BarChart3, Send } from "lucide-react";
 
 const features = [
   {
-    title: "Search & CRM",
-    description: "Talent discovery across 800M+ profiles. Find the perfect candidates with AI-powered search that understands context, skills, and cultural fit.",
-    ctaText: "Try AI Talent Search",
+    id: "search",
+    label: "search",
+    icon: Search,
+    title: "AI-Powered Talent Search",
+    description: "Search across 800M+ profiles with natural language. Our AI understands context, skills, experience, and cultural fit to surface the perfect candidates.",
+    highlights: ["Natural language queries", "800M+ profiles", "Contextual matching"],
   },
   {
-    title: "Insights",
-    description: "Real-time insights for every talent pool. Understand market trends, compensation benchmarks, and competitive intelligence at a glance.",
-    ctaText: "Try AI Talent Insights",
+    id: "insights",
+    label: "insights",
+    icon: BarChart3,
+    title: "Real-Time Market Insights",
+    description: "Get instant access to compensation benchmarks, talent pool analytics, and competitive intelligence for any role or market.",
+    highlights: ["Compensation data", "Market trends", "Competitive intel"],
   },
   {
-    title: "Engagement",
-    description: "Boost replies with automated outreach. Personalized sequences that feel human and drive 3x higher response rates.",
-    ctaText: "Try AI Sequencing",
+    id: "engagement",
+    label: "engagement",
+    icon: Send,
+    title: "Automated Outreach That Works",
+    description: "Craft personalized sequences that feel human. Our AI writes messages that resonate and drive 3x higher response rates.",
+    highlights: ["Personalized at scale", "3x response rates", "Smart sequencing"],
   },
 ];
 
 export function FeaturesSection() {
+  const [activeTab, setActiveTab] = useState("search");
+  const activeFeature = features.find((f) => f.id === activeTab) || features[0];
+
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-white" id="product" data-testid="section-features">
-      <div className="max-w-7xl mx-auto">
+    <section 
+      className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      style={{
+        background: "linear-gradient(180deg, #0D0C1D 0%, #1C1252 50%, #0D0C1D 100%)",
+      }}
+      id="features"
+      data-testid="section-features"
+    >
+      <div className="absolute inset-0 opacity-20">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="diagonal-lines" patternUnits="userSpaceOnUse" width="40" height="40">
+              <path d="M-10,10 l20,-20 M0,40 l40,-40 M30,50 l20,-20" stroke="rgba(255,255,255,0.1)" strokeWidth="1" fill="none"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#diagonal-lines)" />
+        </svg>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="mb-16"
         >
+          <span className="text-[#FF5A30] text-sm font-medium uppercase tracking-wider mb-4 block" data-testid="text-features-label">
+            [01] features
+          </span>
           <h2 
-            className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight"
             data-testid="text-features-heading"
           >
-            Everything you need to recruit smarter
+            How it works: Humans + Agents
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto" data-testid="text-features-subheading">
-            Our AI-powered platform gives you the tools to find, engage, and hire top talent faster than ever.
-          </p>
         </motion.div>
 
-        <div className="space-y-24 lg:space-y-32">
-          {features.map((feature, index) => (
-            <FeatureBlock
-              key={feature.title}
-              {...feature}
-              imagePosition={index % 2 === 0 ? "right" : "left"}
-              index={index}
-            />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="flex gap-2 mb-12 p-1 bg-white/5 rounded-full w-fit border border-white/10"
+        >
+          {features.map((feature) => (
+            <button
+              key={feature.id}
+              onClick={() => setActiveTab(feature.id)}
+              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all ${
+                activeTab === feature.id
+                  ? "bg-white text-[#0D0C1D]"
+                  : "text-white/60 hover:text-white"
+              }`}
+              data-testid={`button-feature-tab-${feature.id}`}
+            >
+              {feature.label}
+            </button>
           ))}
-        </div>
+        </motion.div>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="grid lg:grid-cols-2 gap-12 items-center"
+          >
+            <div>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FF5A30] to-orange-600 flex items-center justify-center">
+                  <activeFeature.icon className="w-6 h-6 text-white" />
+                </div>
+              </div>
+              <h3 
+                className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight"
+                data-testid={`text-feature-title-${activeTab}`}
+              >
+                {activeFeature.title}
+              </h3>
+              <p 
+                className="text-lg text-white/60 mb-8 leading-relaxed"
+                data-testid={`text-feature-description-${activeTab}`}
+              >
+                {activeFeature.description}
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {activeFeature.highlights.map((highlight, idx) => (
+                  <span
+                    key={highlight}
+                    className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-white/80 text-sm"
+                    data-testid={`badge-feature-highlight-${idx}`}
+                  >
+                    {highlight}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="relative">
+              <div 
+                className="aspect-[4/3] bg-[#1a1930]/50 rounded-2xl border border-white/10 flex items-center justify-center overflow-hidden"
+                data-testid={`container-feature-visual-${activeTab}`}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-[#FF5A30]/5 to-[#3AC8F0]/5" />
+                <div className="relative z-10 p-8">
+                  <div className="w-full max-w-sm mx-auto">
+                    <div className="bg-[#0D0C1D]/80 rounded-xl border border-white/10 p-4 mb-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-2 h-2 rounded-full bg-red-500" />
+                        <div className="w-2 h-2 rounded-full bg-yellow-500" />
+                        <div className="w-2 h-2 rounded-full bg-green-500" />
+                      </div>
+                      <div className="space-y-2">
+                        <div className="h-3 bg-white/10 rounded w-3/4" />
+                        <div className="h-3 bg-white/10 rounded w-1/2" />
+                        <div className="h-3 bg-[#FF5A30]/30 rounded w-2/3" />
+                      </div>
+                    </div>
+                    <div className="bg-[#0D0C1D]/60 rounded-xl border border-white/10 p-4">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
+                        <div className="flex-1">
+                          <div className="h-2.5 bg-white/20 rounded w-24 mb-1" />
+                          <div className="h-2 bg-white/10 rounded w-16" />
+                        </div>
+                        <span className="text-[#3AC8F0] text-xs">98%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

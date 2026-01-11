@@ -1,30 +1,62 @@
 import { motion } from "framer-motion";
-import { Search, Brain, Send } from "lucide-react";
+import { Zap, Brain, MessageSquare, Target, Clock, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const agents = [
   {
-    id: "search",
-    title: "AI Search",
-    description: "Search on autopilot. Let AI find candidates while you focus on what matters.",
-    icon: Search,
+    id: "search-agent",
+    title: "Search Agent",
+    description: "Autonomous candidate sourcing that runs 24/7. Set your criteria and let AI find perfect matches while you sleep.",
+    icon: Zap,
+    color: "from-[#FF5A30] to-orange-600",
   },
   {
-    id: "learning",
-    title: "Agentic Learning",
-    description: "Gets better with every hire. Our AI learns your preferences and improves over time.",
+    id: "learning-agent",
+    title: "Learning Agent",
+    description: "Gets smarter with every hire. Learns your preferences, team dynamics, and what makes candidates successful.",
     icon: Brain,
+    color: "from-purple-500 to-pink-500",
   },
   {
-    id: "outreach",
-    title: "Automated Outreach",
-    description: "Outreach that feels personal. Craft messages that resonate and get responses.",
-    icon: Send,
+    id: "outreach-agent",
+    title: "Outreach Agent",
+    description: "Personalized messaging at scale. Crafts compelling sequences that feel human and drive 3x response rates.",
+    icon: MessageSquare,
+    color: "from-[#3AC8F0] to-blue-500",
+  },
+  {
+    id: "matching-agent",
+    title: "Matching Agent",
+    description: "Beyond keyword matching. Understands context, career trajectories, and cultural fit for precise recommendations.",
+    icon: Target,
+    color: "from-green-500 to-emerald-500",
+  },
+  {
+    id: "scheduling-agent",
+    title: "Scheduling Agent",
+    description: "Eliminates scheduling friction. Coordinates interviews across time zones with smart calendar optimization.",
+    icon: Clock,
+    color: "from-yellow-500 to-orange-500",
+  },
+  {
+    id: "analytics-agent",
+    title: "Analytics Agent",
+    description: "Real-time pipeline insights. Track conversion rates, identify bottlenecks, and optimize your hiring funnel.",
+    icon: TrendingUp,
+    color: "from-pink-500 to-rose-500",
   },
 ];
 
 export function AgentsGrid() {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50" data-testid="section-agents">
+    <section 
+      className="py-24 px-4 sm:px-6 lg:px-8 relative"
+      style={{
+        background: "linear-gradient(180deg, #0D0C1D 0%, #06051B 100%)",
+      }}
+      id="agents"
+      data-testid="section-agents"
+    >
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -33,18 +65,21 @@ export function AgentsGrid() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
+          <span className="text-[#FF5A30] text-sm font-medium uppercase tracking-wider mb-4 block" data-testid="text-agents-label">
+            [02] agents
+          </span>
           <h2 
-            className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
             data-testid="text-agents-heading"
           >
-            Deploy AI Agents for every recruiter
+            Deploy AI Agents for every task
           </h2>
-          <p className="text-lg text-slate-600 max-w-2xl mx-auto" data-testid="text-agents-subheading">
-            Autonomous agents that work around the clock to find and engage your next great hire.
+          <p className="text-lg text-white/60 max-w-2xl mx-auto" data-testid="text-agents-subheading">
+            Autonomous agents that work around the clock to find, engage, and hire your next great team member.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {agents.map((agent, index) => (
             <motion.div
               key={agent.id}
@@ -52,23 +87,23 @@ export function AgentsGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100"
+              className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,90,48,0.1)]"
               data-testid={`card-agent-${agent.id}`}
             >
               <div 
-                className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF5A30] to-orange-400 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
+                className={`w-12 h-12 rounded-xl bg-gradient-to-br ${agent.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}
                 data-testid={`icon-agent-${agent.id}`}
               >
-                <agent.icon className="w-7 h-7 text-white" />
+                <agent.icon className="w-6 h-6 text-white" />
               </div>
               <h3 
-                className="text-xl font-bold text-slate-900 mb-3"
+                className="text-xl font-bold text-white mb-3"
                 data-testid={`text-agent-title-${agent.id}`}
               >
                 {agent.title}
               </h3>
               <p 
-                className="text-slate-600 leading-relaxed"
+                className="text-white/50 leading-relaxed text-sm"
                 data-testid={`text-agent-description-${agent.id}`}
               >
                 {agent.description}
@@ -76,6 +111,22 @@ export function AgentsGrid() {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="text-center mt-12"
+        >
+          <Button 
+            size="lg"
+            className="rounded-full bg-[#FF5A30] hover:bg-[#FF5A30]/90 border-none text-white px-8 shadow-[0_0_30px_rgba(255,90,48,0.3)]"
+            data-testid="button-agents-cta"
+          >
+            Try Agents for Free
+          </Button>
+        </motion.div>
       </div>
     </section>
   );

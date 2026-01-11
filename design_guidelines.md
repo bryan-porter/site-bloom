@@ -1,86 +1,110 @@
 # Design Guidelines: Juicebox.ai-Inspired SaaS Landing Page
 
 ## Design Approach
-**Reference-Based Design**: Direct inspiration from Juicebox.ai's premium SaaS aesthetic, combining modern minimalism with strategic visual emphasis.
+**Dark Premium Aesthetic**: Direct inspiration from Juicebox.ai's dark gradient backgrounds, luminous accents, glassmorphism cards, and sophisticated motion.
 
 ## Color Palette
-- **Backgrounds**: `slate-50` or `zinc-50` for light sections
-- **Text**: `slate-900` for primary text
-- **Accent**: Vibrant Orange/Coral `#FF5A30` for CTAs and highlights
-- **Cards**: White backgrounds with subtle shadows
-- **Testimonials**: Very light orange or light gray card backgrounds
+- **Primary Background**: Deep navy to purple gradient `#06051B` → `#1C1252`
+- **Secondary Background**: Charcoal panels `#0D0C1D`
+- **Accent Primary**: Vibrant Coral/Orange `#FF5A30`
+- **Accent Secondary**: Luminous Blue `#3AC8F0`
+- **Accent Tertiary**: Magenta/Pink highlights
+- **Text Primary**: White `#FFFFFF`
+- **Text Secondary**: Gray `rgba(255,255,255,0.7)`
+- **Text Muted**: `rgba(255,255,255,0.5)`
+- **Cards**: Dark glassmorphism with `rgba(255,255,255,0.05)` backgrounds
+- **Borders**: Subtle `rgba(255,255,255,0.1)` borders
+- **Glow Effects**: Coral/blue radial blurs behind key elements
 
 ## Typography System
-- **Font Family**: Inter (clean sans-serif)
-- **Hero Headline**: `text-5xl md:text-7xl`, bold, tight leading
-- **Section Titles**: Large, bold, tracking-tight
-- **Body Text**: Standard Inter weights for readability
-- **Badges/Pills**: Smaller text in pill-shaped containers
+- **Font Family**: Inter with tight letter-spacing
+- **Hero Headline**: `text-5xl md:text-7xl`, bold, `tracking-tight`, `leading-[1.1]`
+- **Section Titles**: Large, bold, tracking-tight, white text
+- **Body Text**: `rgba(255,255,255,0.7)` for contrast on dark backgrounds
+- **Microcopy**: Uppercase, small, letter-spaced labels (e.g., "[01] FEATURES")
+- **Feature Labels**: Orange accent color, uppercase, tracking-wider
 
 ## Spacing & Layout
-- **Max Width**: `max-w-5xl` for hero, `max-w-7xl` for features
-- **Vertical Rhythm**: Generous spacing between sections
+- **Max Width**: `max-w-6xl` for hero, `max-w-7xl` for sections
+- **Vertical Rhythm**: `py-24` to `py-32` between sections
 - **Border Radius**: `rounded-2xl` for cards, `rounded-full` for buttons and pills
-- **Container Padding**: Consistent horizontal padding across breakpoints
+- **Container Padding**: `px-4 sm:px-6 lg:px-8`
 
 ## Component Design Patterns
 
 ### Navigation
-- **Sticky navbar** with `backdrop-blur-md`, `bg-white/80`, `z-50`
+- **Fixed navbar** with dark translucent background `bg-[#06051B]/90`
+- **Backdrop blur**: `backdrop-blur-xl`
 - Logo left, navigation + CTAs right
-- Mobile hamburger drawer pattern
-- Primary CTA: Orange pill button
+- **Primary CTA**: Orange pill button with glow effect
+- Mobile hamburger with dark drawer
 
 ### Hero Section
-- Centered layout with badge → headline → subhead → CTA row structure
-- **Headline**: Maximum visual impact, bold typography
-- **CTA Pattern**: Primary orange button + outline secondary button side-by-side
-- **Interactive Element**: Large chat interface mockup with floating candidate cards using absolute positioning
-- **Card Animations**: Subtle float effect on candidate cards
+- **Full-width dark gradient background**
+- **Radial gradient orbs**: Coral and blue blurred circles behind content
+- **Badge**: Dark pill with coral dot indicator
+- **Headline**: Bold white, maximum impact
+- **Subhead**: Muted white text
+- **CTA Row**: Orange primary + outline secondary buttons
+- **Interactive Mockup**: Dark card with search interface
+- **Floating Candidate Cards**: Dark glassmorphism with subtle glow, floating animation
 
-### Feature Blocks (Alternating Layout)
-- **Pattern**: Text Left/Image Right → Image Left/Text Right alternating
-- **Visual Placeholders**: Gray rounded rectangles for product screenshots
-- **Structure**: Title, description, CTA button per block
-- Three distinct features: Search & CRM, Insights, Engagement
+### Feature Blocks
+- **Tabbed Navigation**: "search | insights | engagement" tabs
+- **Dark panels** with subtle diagonal line patterns
+- **Alternating layouts**: Text/visual switching sides
+- **Orange accent** for labels and highlights
+- **Embedded mockups**: Dark interface screenshots
 
 ### Cards & Grids
-- **AI Agents Grid**: 3-column layout with white cards
-- **Shadow Strategy**: `shadow-sm` default, `hover:shadow-xl` transition
-- **Testimonial Grid**: 4 cards with colored backgrounds
-- **Integration Logos**: Horizontal flex row, grayscale treatment
+- **Glassmorphism**: `bg-white/5` with `backdrop-blur`, `border-white/10`
+- **Glow on hover**: Subtle coral/blue glow borders
+- **Shadow Strategy**: Use glow effects instead of traditional shadows
+- **AI Agents**: Grid with icon badges, titles, descriptions
 
-### Interactive Elements
-- **FAQ Accordion**: Two-column desktop (intro left, questions right), collapsible items
-- **Hover Effects**: Shadow elevation on cards, subtle transitions
-- **Scroll Animations**: Fade-in with `opacity: 0, y: 20` → `opacity: 1, y: 0` using Framer Motion
+### Logo Marquee
+- **Continuous horizontal scroll animation**
+- **Grayscale logos** that colorize on hover
+- **Dark background strip**
 
-### Footer Structure
-- **Top Callout**: Large dark hero-style CTA section
-- **Link Columns**: 5-column grid (Product, Resources, Partners, Company, Security)
-- **Bottom Bar**: Copyright, legal links
+### Testimonials
+- **Dark cards** with colored accent backgrounds
+- **Quote styling**: Italic with quotation marks
+- **Avatar + name + role** layout
+
+### FAQ Section
+- **Two-column**: Intro left, accordion right
+- **Dark background panel** for questions
+- **Smooth expand/collapse** animation
+- **Chevron rotation** on open/close
+
+### Footer
+- **Top CTA**: Large headline section with gradient background
+- **Dark footer**: Navy background
+- **Link columns**: Organized grid
+- **Muted text** for copyright
 
 ## Animation Guidelines
-- **Scroll Animations**: Subtle fade-in on scroll for all major sections
-- **Hover Effects**: Card shadow transitions, button states
-- **Hero Elements**: Floating animation on candidate cards
-- **Performance**: Keep animations subtle and performant
+- **Scroll Reveals**: Staggered fade-in-up on viewport entry
+- **Parallax**: Subtle background movement on scroll
+- **Floating Cards**: Continuous gentle float with varying delays
+- **Hover Glow**: Cards gain subtle luminous border on hover
+- **Marquee**: Infinite smooth scroll for logos
+- **Tab Transitions**: Smooth content crossfade
 
-## Images & Visuals
-- **Hero**: Chat interface mockup with floating candidate cards (avatars, names, role tags)
-- **Feature Blocks**: Product screenshot placeholders (gray rounded rectangles)
-- **Candidate Cards**: Include dummy avatars, names (e.g., "Dean Wiegand"), roles, skill tags (Python, React)
-- **Social Proof**: Text-based logo placeholders styled as brand marks
+## Glow Effects
+- **Hero Orbs**: Large blurred gradient circles (`blur-3xl`)
+- **Card Hover**: `box-shadow: 0 0 30px rgba(255,90,48,0.2)`
+- **Button Glow**: Subtle coral glow behind primary buttons
+- **Accent Lines**: Diagonal grid lines with low opacity
 
 ## Responsive Behavior
-- **Mobile Navigation**: Hamburger menu drawer
-- **Grid Adaptations**: 3-column → 2-column → 1-column as needed
-- **FAQ Layout**: Two-column desktop → stacked mobile
-- **Text Scaling**: Responsive typography from mobile to desktop
-- **Card Layouts**: Maintain readability and touch targets on all devices
+- **Mobile**: Stack all grids, reduce spacing
+- **Navigation**: Hamburger menu with dark drawer
+- **Typography**: Scale down headlines on mobile
+- **Cards**: Single column on mobile
 
-## Accessibility & UX
-- **Interactive States**: Clear hover, active, focus states
-- **Touch Targets**: Adequate sizing for mobile interactions
-- **Contrast**: Maintain WCAG standards with slate-900 on light backgrounds
-- **Navigation**: Clear visual hierarchy and logical tab order
+## Accessibility
+- **Contrast**: Ensure white text on dark backgrounds meets WCAG
+- **Focus States**: Visible focus rings using accent colors
+- **Reduced Motion**: Respect prefers-reduced-motion media query

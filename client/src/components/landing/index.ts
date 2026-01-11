@@ -1,8 +1,10 @@
 export { Navbar } from "./Navbar";
 export { Hero } from "./Hero";
-export { ValueProp, SocialProof } from "./SocialProof";
-export { FeatureBlock, FeaturesSection } from "./FeatureBlock";
+export { LogoMarquee } from "./LogoMarquee";
+export { ValueStatement } from "./ValueStatement";
+export { FeaturesSection } from "./FeatureBlock";
 export { AgentsGrid } from "./AgentsGrid";
+export { SocialProof } from "./SocialProof";
 export { Testimonials } from "./Testimonials";
 export { FAQ } from "./FAQ";
 export { Footer } from "./Footer";

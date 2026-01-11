@@ -1,7 +1,8 @@
 import {
   Navbar,
   Hero,
-  ValueProp,
+  LogoMarquee,
+  ValueStatement,
   FeaturesSection,
   AgentsGrid,
   SocialProof,
@@ -12,11 +13,12 @@ import {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#06051B]">
       <Navbar />
       <main>
         <Hero />
-        <ValueProp />
+        <LogoMarquee />
+        <ValueStatement />
         <FeaturesSection />
         <AgentsGrid />
         <SocialProof />
