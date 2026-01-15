@@ -50,7 +50,7 @@ function FAQItem({
   onClick: () => void;
 }) {
   return (
-    <div className="border-b border-white/10 last:border-b-0">
+    <div className="border-b border-white/20 last:border-b-0">
       <button
         className="w-full py-5 flex items-center justify-between text-left group"
         onClick={onClick}
@@ -58,7 +58,7 @@ function FAQItem({
         aria-expanded={isOpen}
       >
         <span 
-          className="text-lg font-semibold text-white group-hover:text-[#FF5A30] transition-colors pr-4"
+          className="text-lg font-semibold text-white group-hover:text-white/80 transition-colors pr-4"
           data-testid={`text-faq-question-${id}`}
         >
           {question}
@@ -68,7 +68,7 @@ function FAQItem({
           transition={{ duration: 0.2 }}
           className="flex-shrink-0"
         >
-          <ChevronDown className="w-5 h-5 text-white/40 group-hover:text-[#FF5A30] transition-colors" />
+          <ChevronDown className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
         </motion.div>
       </button>
       <AnimatePresence initial={false}>
@@ -81,7 +81,7 @@ function FAQItem({
             className="overflow-hidden"
           >
             <p 
-              className="pb-5 text-white/50 leading-relaxed" 
+              className="pb-5 text-white/70 leading-relaxed" 
               data-testid={`text-faq-answer-${id}`}
             >
               {answer}
@@ -98,10 +98,7 @@ export function FAQ() {
 
   return (
     <section 
-      className="py-24 px-4 sm:px-6 lg:px-8"
-      style={{
-        background: "linear-gradient(180deg, #0D0C1D 0%, #06051B 100%)",
-      }}
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-[#9333EA]"
       data-testid="section-faq"
     >
       <div className="max-w-7xl mx-auto">
@@ -113,27 +110,32 @@ export function FAQ() {
             viewport={{ once: true }}
             className="lg:sticky lg:top-32 lg:self-start"
           >
-            <span className="text-[#FF5A30] text-sm font-medium uppercase tracking-wider mb-4 block" data-testid="text-faq-label">
-              [04] faq
+            <span 
+              className="text-white/70 text-sm uppercase tracking-wider mb-4 block"
+              style={{ fontFamily: "'VT323', monospace" }}
+              data-testid="text-faq-label"
+            >
+              [04] FAQ
             </span>
             <h2 
-              className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight"
+              className="text-4xl md:text-5xl font-medium text-white mb-6 tracking-tight"
               data-testid="text-faq-heading"
             >
               Your questions,<br />answered
             </h2>
             <p 
-              className="text-lg text-white/50 mb-8 leading-relaxed"
+              className="text-lg text-white/70 mb-8 leading-relaxed"
               data-testid="text-faq-subheading"
             >
               Can't find what you're looking for? Our team is here to help you get started.
             </p>
             <Button 
               size="lg" 
-              className="rounded-full bg-[#FF5A30] hover:bg-[#FF5A30]/90 border-none text-white px-8 shadow-[0_0_30px_rgba(255,90,48,0.3)]"
+              className="bg-white text-[#9333EA] hover:bg-white/90 px-8 uppercase tracking-wider"
+              style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
               data-testid="button-faq-demo"
             >
-              Book a Demo
+              BOOK A DEMO
             </Button>
           </motion.div>
 
@@ -142,7 +144,7 @@ export function FAQ() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
-            className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/10"
+            className="bg-white/10 backdrop-blur-sm rounded-lg p-6 md:p-8 border border-white/20"
             data-testid="container-faq-list"
           >
             {faqs.map((faq, index) => (

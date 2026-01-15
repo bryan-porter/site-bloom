@@ -13,7 +13,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#06051B]">
+    <div className="min-h-screen bg-white">
       <Navbar />
       <main>
         <Hero />

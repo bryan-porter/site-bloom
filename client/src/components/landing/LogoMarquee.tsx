@@ -1,14 +1,25 @@
 import { motion } from "framer-motion";
+import { SiReact, SiTypescript, SiNodedotjs, SiTailwindcss, SiNextdotjs, SiVite, SiPostgresql, SiDocker, SiGithub, SiVercel, SiPython, SiGo } from "react-icons/si";
 
-const companies = [
-  "Coinbase", "Stripe", "Figma", "Linear", "Vercel", 
-  "Notion", "Slack", "Asana", "Dropbox", "Plaid",
+const tools = [
+  { name: "React", icon: SiReact },
+  { name: "TypeScript", icon: SiTypescript },
+  { name: "Node.js", icon: SiNodedotjs },
+  { name: "Tailwind", icon: SiTailwindcss },
+  { name: "Next.js", icon: SiNextdotjs },
+  { name: "Vite", icon: SiVite },
+  { name: "PostgreSQL", icon: SiPostgresql },
+  { name: "Docker", icon: SiDocker },
+  { name: "GitHub", icon: SiGithub },
+  { name: "Vercel", icon: SiVercel },
+  { name: "Python", icon: SiPython },
+  { name: "Go", icon: SiGo },
 ];
 
 export function LogoMarquee() {
   return (
     <section 
-      className="py-12 bg-[#06051B] border-y border-white/5 overflow-hidden"
+      className="py-12 bg-[#9333EA] overflow-hidden"
       data-testid="section-logo-marquee"
     >
       <div className="relative">
@@ -24,13 +35,19 @@ export function LogoMarquee() {
           }}
           className="flex gap-16 items-center whitespace-nowrap"
         >
-          {[...companies, ...companies, ...companies].map((company, index) => (
+          {[...tools, ...tools, ...tools].map((tool, index) => (
             <div
-              key={`${company}-${index}`}
-              className="text-white/30 hover:text-white/60 transition-colors text-xl font-semibold tracking-tight cursor-default"
-              data-testid={`logo-company-${index}`}
+              key={`${tool.name}-${index}`}
+              className="flex items-center gap-3 text-white/80 hover:text-white transition-colors cursor-default"
+              data-testid={`logo-tool-${index}`}
             >
-              {company}
+              <tool.icon className="w-6 h-6" />
+              <span 
+                className="text-lg tracking-wider"
+                style={{ fontFamily: "'VT323', monospace" }}
+              >
+                {tool.name.toUpperCase()}
+              </span>
             </div>
           ))}
         </motion.div>

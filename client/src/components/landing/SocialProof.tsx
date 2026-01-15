@@ -1,23 +1,20 @@
 import { motion } from "framer-motion";
 
 const integrations = [
-  { id: "greenhouse", name: "Greenhouse" },
-  { id: "workday", name: "Workday" },
-  { id: "lever", name: "Lever" },
-  { id: "gmail", name: "Gmail" },
-  { id: "slack", name: "Slack" },
-  { id: "linkedin", name: "LinkedIn" },
-  { id: "outlook", name: "Outlook" },
-  { id: "ashby", name: "Ashby" },
+  { id: "greenhouse", name: "GREENHOUSE" },
+  { id: "workday", name: "WORKDAY" },
+  { id: "lever", name: "LEVER" },
+  { id: "gmail", name: "GMAIL" },
+  { id: "slack", name: "SLACK" },
+  { id: "linkedin", name: "LINKEDIN" },
+  { id: "outlook", name: "OUTLOOK" },
+  { id: "ashby", name: "ASHBY" },
 ];
 
 export function SocialProof() {
   return (
     <section 
-      className="py-20 px-4 sm:px-6 lg:px-8"
-      style={{
-        background: "linear-gradient(180deg, #06051B 0%, #0D0C1D 100%)",
-      }}
+      className="py-20 px-4 sm:px-6 lg:px-8 bg-[#9333EA]"
       data-testid="section-social-proof"
     >
       <div className="max-w-7xl mx-auto">
@@ -29,12 +26,12 @@ export function SocialProof() {
           className="text-center mb-12"
         >
           <h2 
-            className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight"
+            className="text-3xl md:text-4xl font-medium text-white mb-4 tracking-tight"
             data-testid="text-integrations-heading"
           >
             Integrates with your stack
           </h2>
-          <p className="text-white/50 text-lg" data-testid="text-integrations-subheading">
+          <p className="text-white/70 text-lg" data-testid="text-integrations-subheading">
             Connect seamlessly with the tools you already use
           </p>
         </motion.div>
@@ -53,10 +50,11 @@ export function SocialProof() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: index * 0.05 }}
               viewport={{ once: true }}
-              className="px-6 py-3 bg-white/5 border border-white/10 rounded-xl text-white/40 hover:text-white/80 hover:border-white/20 hover:bg-white/10 transition-all duration-300 cursor-default"
+              className="px-6 py-3 bg-white/10 border border-white/20 rounded-md text-white/70 hover:text-white hover:border-white/40 hover:bg-white/20 transition-all duration-300 cursor-default"
+              style={{ fontFamily: "'VT323', monospace" }}
               data-testid={`logo-integration-${integration.id}`}
             >
-              <span className="font-semibold text-sm tracking-tight">
+              <span className="text-sm tracking-wider">
                 {integration.name}
               </span>
             </motion.div>

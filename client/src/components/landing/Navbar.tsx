@@ -4,22 +4,22 @@ import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { label: "features", href: "#features", hasDropdown: true },
-  { label: "pricing", href: "#pricing", hasDropdown: false },
-  { label: "resources", href: "#resources", hasDropdown: true },
-  { label: "customers", href: "#customers", hasDropdown: false },
+  { label: "FEATURES", href: "#features", hasDropdown: true },
+  { label: "PRICING", href: "#pricing", hasDropdown: false },
+  { label: "RESOURCES", href: "#resources", hasDropdown: true },
+  { label: "CUSTOMERS", href: "#customers", hasDropdown: false },
 ];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#06051B]/90 backdrop-blur-xl border-b border-white/5" data-testid="navbar">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200" data-testid="navbar">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <a href="/" className="text-2xl font-bold tracking-tight text-white" data-testid="link-logo">
-              <span className="text-[#FF5A30]">juice</span>box
+            <a href="/" className="text-2xl font-bold tracking-tight text-gray-900" style={{ fontFamily: "'VT323', monospace" }} data-testid="link-logo">
+              <span className="text-[#9333EA]">JUICE</span>BOX
             </a>
           </div>
 
@@ -28,7 +28,8 @@ export function Navbar() {
               <a
                 key={link.label}
                 href={link.href}
-                className="flex items-center gap-1 px-4 py-2 text-white/70 hover:text-white font-medium transition-colors text-sm"
+                className="flex items-center gap-1 px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors text-sm tracking-wider"
+                style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
                 data-testid={`link-nav-${link.label.toLowerCase()}`}
               >
                 {link.label}
@@ -40,23 +41,25 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             <Button 
               variant="ghost" 
-              className="text-white/70 hover:text-white hover:bg-white/5"
+              className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 uppercase tracking-wider"
+              style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
               data-testid="button-signin"
             >
-              Sign In
+              SIGN IN
             </Button>
             <Button 
-              className="rounded-full bg-[#FF5A30] hover:bg-[#FF5A30]/90 border-none text-white shadow-[0_0_20px_rgba(255,90,48,0.3)]"
+              className="bg-gray-900 hover:bg-gray-800 text-white uppercase tracking-wider"
+              style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
               data-testid="button-demo"
             >
-              book a demo
+              BOOK A DEMO
             </Button>
           </div>
 
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden text-white"
+            className="md:hidden text-gray-900"
             onClick={() => setIsOpen(!isOpen)}
             data-testid="button-mobile-menu"
             aria-label="Toggle mobile menu"
@@ -72,7 +75,7 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#06051B] border-b border-white/10"
+            className="md:hidden bg-white border-b border-gray-200"
             data-testid="mobile-menu"
           >
             <div className="px-4 py-4 space-y-1">
@@ -80,26 +83,29 @@ export function Navbar() {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="block px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-lg font-medium"
+                  className="block px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg tracking-wider"
+                  style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
                   data-testid={`link-mobile-nav-${link.label.toLowerCase()}`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
                 </a>
               ))}
-              <div className="pt-4 border-t border-white/10 space-y-3">
+              <div className="pt-4 border-t border-gray-200 space-y-3">
                 <Button 
                   variant="ghost" 
-                  className="w-full justify-center text-white/70 hover:text-white hover:bg-white/5"
+                  className="w-full justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 uppercase tracking-wider"
+                  style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
                   data-testid="button-mobile-signin"
                 >
-                  Sign In
+                  SIGN IN
                 </Button>
                 <Button 
-                  className="w-full justify-center rounded-full bg-[#FF5A30] hover:bg-[#FF5A30]/90 border-none text-white"
+                  className="w-full justify-center bg-gray-900 hover:bg-gray-800 text-white uppercase tracking-wider"
+                  style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
                   data-testid="button-mobile-demo"
                 >
-                  book a demo
+                  BOOK A DEMO
                 </Button>
               </div>
             </div>
