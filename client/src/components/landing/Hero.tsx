@@ -2,14 +2,15 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useMemo } from "react";
 
-function AsciiDotGrid() {
-  const dots = useMemo(() => {
+function AsciiCharGrid() {
+  const chars = useMemo(() => {
     const result = [];
-    const cols = 80;
-    const rows = 40;
+    const cols = 100;
+    const rows = 50;
     const centerX = cols / 2;
     const centerY = rows / 2;
     const maxDist = Math.sqrt(centerX * centerX + centerY * centerY);
+    const asciiChars = ['*', '+', '.', '#', '~', '^', ':', ';', '`', "'", '"', '|', '/', '\\', '-', '='];
     
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
@@ -17,15 +18,16 @@ function AsciiDotGrid() {
           Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)
         );
         const normalizedDist = distFromCenter / maxDist;
-        const opacity = Math.max(0, normalizedDist * 0.8);
-        const size = 2 + normalizedDist * 2;
         
-        if (normalizedDist > 0.3) {
+        if (normalizedDist > 0.25) {
+          const opacity = Math.min(0.9, (normalizedDist - 0.25) * 1.2);
+          const charIndex = (x + y) % asciiChars.length;
+          
           result.push({
             x: (x / cols) * 100,
             y: (y / rows) * 100,
             opacity,
-            size,
+            char: asciiChars[charIndex],
             key: `${x}-${y}`,
           });
         }
@@ -36,21 +38,31 @@ function AsciiDotGrid() {
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <svg 
-        className="w-full h-full" 
-        viewBox="0 0 100 100" 
-        preserveAspectRatio="xMidYMid slice"
+      <div 
+        className="absolute inset-0"
+        style={{ fontFamily: "'VT323', monospace", fontSize: "12px", lineHeight: "1" }}
       >
-        {dots.map((dot) => (
-          <circle
-            key={dot.key}
-            cx={dot.x}
-            cy={dot.y}
-            r={dot.size * 0.08}
-            fill={`rgba(147, 51, 234, ${dot.opacity})`}
-          />
+        {chars.map((item) => (
+          <span
+            key={item.key}
+            className="absolute"
+            style={{
+              left: `${item.x}%`,
+              top: `${item.y}%`,
+              color: `rgba(147, 51, 234, ${item.opacity})`,
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            {item.char}
+          </span>
         ))}
-      </svg>
+      </div>
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: "radial-gradient(ellipse 50% 60% at center, white 0%, white 50%, transparent 70%)",
+        }}
+      />
     </div>
   );
 }
@@ -61,9 +73,9 @@ export function Hero() {
       className="relative min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white"
       data-testid="section-hero"
     >
-      <AsciiDotGrid />
+      <AsciiCharGrid />
 
-      <div className="relative max-w-4xl mx-auto text-center pt-16">
+      <div className="relative max-w-4xl mx-auto text-center pt-16 z-10">
         <motion.a
           href="#agents"
           initial={{ opacity: 0, y: 20 }}
