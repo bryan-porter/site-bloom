@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useMemo } from "react";
+import { BookDemoModal } from "@/components/BookDemoModal";
+import { useToast } from "@/hooks/use-toast";
 
 function AsciiCharGrid() {
   const chars = useMemo(() => {
@@ -68,77 +71,97 @@ function AsciiCharGrid() {
 }
 
 export function Hero() {
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+  const { toast } = useToast();
+
+  const handleTryFree = () => {
+    toast({
+      title: "Welcome to Juicebox!",
+      description: "Free trial coming soon. Book a demo to get early access!",
+    });
+  };
+
   return (
-    <section 
-      className="relative min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white"
-      data-testid="section-hero"
-    >
-      <AsciiCharGrid />
+    <>
+      <section 
+        className="relative min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white"
+        data-testid="section-hero"
+      >
+        <AsciiCharGrid />
 
-      <div className="relative max-w-4xl mx-auto text-center pt-16 z-10">
-        <motion.a
-          href="#agents"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border border-gray-200 text-gray-600 text-sm mb-8 hover:bg-gray-200 transition-colors cursor-pointer"
-          style={{ fontFamily: "'VT323', monospace", fontSize: "14px", letterSpacing: "0.05em" }}
-          data-testid="badge-hero-announcement"
-        >
-          <span className="px-2 py-0.5 bg-gray-900 rounded text-white text-xs" style={{ fontFamily: "'VT323', monospace" }}>NEW</span>
-          TRY JUICEBOX AGENTS &gt;
-        </motion.a>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-5xl md:text-6xl lg:text-7xl font-medium text-gray-900 tracking-tight leading-[1.1] mb-6"
-          data-testid="text-hero-headline"
-        >
-          Win the talent war.
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed"
-          data-testid="text-hero-subhead"
-        >
-          Juicebox is the <span className="text-gray-900 font-medium">AI Recruiting Platform</span> that understands who you're looking for. Level up your team with Search, CRM, and Agents.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <Button 
-            size="lg" 
-            className="bg-gray-900 hover:bg-gray-800 text-white px-8 uppercase tracking-wider"
-            style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
-            data-testid="button-hero-try"
+        <div className="relative max-w-4xl mx-auto text-center pt-16 z-10">
+          <motion.a
+            href="#agents"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("agents")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border border-gray-200 text-gray-600 text-sm mb-8 hover:bg-gray-200 transition-colors cursor-pointer"
+            style={{ fontFamily: "'VT323', monospace", fontSize: "14px", letterSpacing: "0.05em" }}
+            data-testid="badge-hero-announcement"
           >
-            TRY FOR FREE
-          </Button>
-          <Button 
-            size="lg" 
-            variant="outline" 
-            className="border-gray-300 text-gray-700 hover:bg-gray-100 px-8 uppercase tracking-wider"
-            style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
-            data-testid="button-hero-demo"
-          >
-            BOOK A DEMO
-          </Button>
-        </motion.div>
-      </div>
+            <span className="px-2 py-0.5 bg-gray-900 rounded text-white text-xs" style={{ fontFamily: "'VT323', monospace" }}>NEW</span>
+            TRY JUICEBOX AGENTS &gt;
+          </motion.a>
 
-      <div 
-        className="absolute bottom-0 right-0 w-16 h-16 border-l border-t border-gray-300"
-        style={{ transform: "rotate(45deg) translate(50%, 50%)" }}
-      />
-    </section>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-5xl md:text-6xl lg:text-7xl font-medium text-gray-900 tracking-tight leading-[1.1] mb-6"
+            data-testid="text-hero-headline"
+          >
+            Win the talent war.
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed"
+            data-testid="text-hero-subhead"
+          >
+            Juicebox is the <span className="text-gray-900 font-medium">AI Recruiting Platform</span> that understands who you're looking for. Level up your team with Search, CRM, and Agents.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <Button 
+              size="lg" 
+              className="bg-gray-900 hover:bg-gray-800 text-white px-8 uppercase tracking-wider cursor-pointer"
+              style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
+              onClick={handleTryFree}
+              data-testid="button-hero-try"
+            >
+              TRY FOR FREE
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-gray-300 text-gray-700 hover:bg-gray-100 px-8 uppercase tracking-wider cursor-pointer"
+              style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
+              onClick={() => setIsDemoModalOpen(true)}
+              data-testid="button-hero-demo"
+            >
+              BOOK A DEMO
+            </Button>
+          </motion.div>
+        </div>
+
+        <div 
+          className="absolute bottom-0 right-0 w-16 h-16 border-l border-t border-gray-300"
+          style={{ transform: "rotate(45deg) translate(50%, 50%)" }}
+        />
+      </section>
+
+      <BookDemoModal open={isDemoModalOpen} onOpenChange={setIsDemoModalOpen} />
+    </>
   );
 }

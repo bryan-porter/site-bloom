@@ -1,0 +1,66 @@
+Role: Senior Full-Stack Engineer
+
+Context: The site design is implemented, but "Book a Demo", "Sign In", and several secondary navigation links (Pricing, Resources, etc.) are non-functional (dead clicks).
+
+Core Objective: Make the site 100% interactive. No button or link should be "dead." If a feature isn't ready, the user must receive feedback (e.g., a "Coming Soon" toast) rather than silence.
+
+STEP 0: STACK DETECTION & STRATEGY
+Analyze the Repo: Determine if this is a Static site (Vite/React only) or a Full-stack app.
+
+Mobile Check: Locate the Mobile Menu component immediately. You must apply fixes to both Desktop and Mobile navigations.
+
+Data Strategy: Use existing DB if available. If not, use localStorage and mock API calls (using setTimeout) to simulate backend behavior.
+
+STEP 1: FIX MAIN NAVIGATION (Book Demo & Sign In)
+"Book a Demo":
+
+If CALENDLY_URL exists in secrets, open it.
+
+Otherwise, open a Modal/Form. On submit: Show Loading Spinner -> Wait 1.5s -> Show Success Toast.
+
+"Sign In":
+
+Create a simple /signin page.
+
+Validate against ADMIN_EMAIL / ADMIN_PASSWORD (from Secrets).
+
+On Success: Redirect to /dashboard.
+
+On Failure: Show a visible Red Error Alert.
+
+STEP 2: GENERAL LINK SWEEP (Pricing, Resources, etc.)
+Scan the Header, Footer, and Body for secondary links like "Pricing", "Resources", "Company", "Learn More", etc. Fix them using this logic hierarchy:
+
+Anchor Link Check: Does a section exist on the homepage with a matching ID (e.g., id="pricing")?
+
+Action: Update the link to href="/#pricing" for smooth scrolling.
+
+Route Check: Does a dedicated page file exist (e.g., /pricing)?
+
+Action: Ensure the link points to that route.
+
+Fallback (Crucial): If neither exists, DO NOT leave the link dead.
+
+Action: Add an onClick handler that triggers a "Feature Coming Soon" or "Under Construction" Toast notification.
+
+User Feedback: The user must see visual feedback that their click was registered.
+
+STEP 3: VISUAL & INTERACTIVE POLISH
+Cursors: Ensure all clickable elements (buttons, links, icons) have cursor: pointer.
+
+Hover States: Ensure all buttons have a slight hover effect (opacity change or background shift) so they feel alive.
+
+Mobile Menu: Ensure the hamburger menu opens/closes correctly and that all links inside it follow the logic above.
+
+STEP 4: QA & DELIVERABLES
+Click-Test Everything: Verify that clicking "Pricing" or "Resources" either scrolls to the section or shows a "Coming Soon" message.
+
+Mobile Verification: Confirm the mobile menu links are just as functional as desktop.
+
+Deliverables:
+
+List of files changed.
+
+List of Replit Secrets required.
+
+Confirmation that you performed a "Dead Click Hunt" and fixed all non-responsive elements.

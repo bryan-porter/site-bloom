@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Zap, Brain, MessageSquare, Target, Clock, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 const agents = [
   {
@@ -42,6 +43,15 @@ const agents = [
 ];
 
 export function AgentsGrid() {
+  const { toast } = useToast();
+
+  const handleTryAgents = () => {
+    toast({
+      title: "Welcome to Juicebox Agents!",
+      description: "Free trial coming soon. We'll notify you when it's ready!",
+    });
+  };
+
   return (
     <section 
       className="py-24 px-4 sm:px-6 lg:px-8 relative bg-white"
@@ -82,7 +92,7 @@ export function AgentsGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="group relative bg-gray-50 rounded-lg p-6 border border-gray-200 hover:border-[#9333EA]/30 hover:bg-purple-50/50 transition-all duration-300"
+              className="group relative bg-gray-50 rounded-lg p-6 border border-gray-200 hover:border-[#9333EA]/30 hover:bg-purple-50/50 transition-all duration-300 cursor-pointer"
               data-testid={`card-agent-${agent.id}`}
             >
               <div 
@@ -116,8 +126,9 @@ export function AgentsGrid() {
         >
           <Button 
             size="lg"
-            className="bg-gray-900 hover:bg-gray-800 text-white px-8 uppercase tracking-wider"
+            className="bg-gray-900 hover:bg-gray-800 text-white px-8 uppercase tracking-wider cursor-pointer"
             style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
+            onClick={handleTryAgents}
             data-testid="button-agents-cta"
           >
             TRY AGENTS FOR FREE

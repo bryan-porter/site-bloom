@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookDemoModal } from "@/components/BookDemoModal";
 
 const faqs = [
   {
@@ -52,7 +53,7 @@ function FAQItem({
   return (
     <div className="border-b border-white/20 last:border-b-0">
       <button
-        className="w-full py-5 flex items-center justify-between text-left group"
+        className="w-full py-5 flex items-center justify-between text-left group cursor-pointer"
         onClick={onClick}
         data-testid={`button-faq-${id}`}
         aria-expanded={isOpen}
@@ -95,71 +96,78 @@ function FAQItem({
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   return (
-    <section 
-      className="py-24 px-4 sm:px-6 lg:px-8 bg-[#9333EA]"
-      data-testid="section-faq"
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="lg:sticky lg:top-32 lg:self-start"
-          >
-            <span 
-              className="text-white/70 text-sm uppercase tracking-wider mb-4 block"
-              style={{ fontFamily: "'VT323', monospace" }}
-              data-testid="text-faq-label"
+    <>
+      <section 
+        className="py-24 px-4 sm:px-6 lg:px-8 bg-[#9333EA]"
+        id="faq"
+        data-testid="section-faq"
+      >
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="lg:sticky lg:top-32 lg:self-start"
             >
-              [04] FAQ
-            </span>
-            <h2 
-              className="text-4xl md:text-5xl font-medium text-white mb-6 tracking-tight"
-              data-testid="text-faq-heading"
-            >
-              Your questions,<br />answered
-            </h2>
-            <p 
-              className="text-lg text-white/70 mb-8 leading-relaxed"
-              data-testid="text-faq-subheading"
-            >
-              Can't find what you're looking for? Our team is here to help you get started.
-            </p>
-            <Button 
-              size="lg" 
-              className="bg-white text-[#9333EA] hover:bg-white/90 px-8 uppercase tracking-wider"
-              style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
-              data-testid="button-faq-demo"
-            >
-              BOOK A DEMO
-            </Button>
-          </motion.div>
+              <span 
+                className="text-white/70 text-sm uppercase tracking-wider mb-4 block"
+                style={{ fontFamily: "'VT323', monospace" }}
+                data-testid="text-faq-label"
+              >
+                [04] FAQ
+              </span>
+              <h2 
+                className="text-4xl md:text-5xl font-medium text-white mb-6 tracking-tight"
+                data-testid="text-faq-heading"
+              >
+                Your questions,<br />answered
+              </h2>
+              <p 
+                className="text-lg text-white/70 mb-8 leading-relaxed"
+                data-testid="text-faq-subheading"
+              >
+                Can't find what you're looking for? Our team is here to help you get started.
+              </p>
+              <Button 
+                size="lg" 
+                className="bg-white text-[#9333EA] hover:bg-white/90 px-8 uppercase tracking-wider cursor-pointer"
+                style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
+                onClick={() => setIsDemoModalOpen(true)}
+                data-testid="button-faq-demo"
+              >
+                BOOK A DEMO
+              </Button>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="bg-white/10 backdrop-blur-sm rounded-lg p-6 md:p-8 border border-white/20"
-            data-testid="container-faq-list"
-          >
-            {faqs.map((faq, index) => (
-              <FAQItem
-                key={faq.id}
-                id={faq.id}
-                question={faq.question}
-                answer={faq.answer}
-                isOpen={openIndex === index}
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-              />
-            ))}
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white/10 backdrop-blur-sm rounded-lg p-6 md:p-8 border border-white/20"
+              data-testid="container-faq-list"
+            >
+              {faqs.map((faq, index) => (
+                <FAQItem
+                  key={faq.id}
+                  id={faq.id}
+                  question={faq.question}
+                  answer={faq.answer}
+                  isOpen={openIndex === index}
+                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                />
+              ))}
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <BookDemoModal open={isDemoModalOpen} onOpenChange={setIsDemoModalOpen} />
+    </>
   );
 }
