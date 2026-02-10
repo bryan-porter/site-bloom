@@ -22,6 +22,12 @@ export function LogoMarquee() {
       className="py-12 bg-[#9333EA] overflow-hidden"
       data-testid="section-logo-marquee"
     >
+      <p 
+        className="text-center text-white/60 text-sm uppercase tracking-wider mb-6"
+        style={{ fontFamily: "'VT323', monospace" }}
+      >
+        BUILT WITH THE TOOLS THAT POWER THE MODERN WEB
+      </p>
       <div className="relative">
         <motion.div
           animate={{ x: [0, -1920] }}

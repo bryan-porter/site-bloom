@@ -5,37 +5,35 @@ import { BookDemoModal } from "@/components/BookDemoModal";
 import { useToast } from "@/hooks/use-toast";
 
 const footerLinks = {
-  Product: [
-    { label: "Search", section: "features" },
-    { label: "CRM", section: null },
-    { label: "Agents", section: "agents" },
-    { label: "Insights", section: null },
-    { label: "Integrations", section: null },
+  Services: [
+    { label: "Full Redesign", section: "features" },
+    { label: "Speed Optimization", section: "agents" },
+    { label: "Mobile Overhaul", section: "agents" },
+    { label: "SEO & Visibility", section: null },
+    { label: "Analytics", section: null },
     { label: "Pricing", section: null },
   ],
   Resources: [
     { label: "Blog", section: null },
+    { label: "Case Studies", section: "testimonials" },
+    { label: "Free Audit", section: null },
+    { label: "Site Grader", section: null },
     { label: "Guides", section: null },
-    { label: "Case Studies", section: null },
-    { label: "Webinars", section: null },
-    { label: "API Docs", section: null },
   ],
-  Partners: [
-    { label: "Agency Program", section: null },
-    { label: "ATS Partners", section: null },
-    { label: "Referral Program", section: null },
+  Platforms: [
+    { label: "Shopify", section: null },
+    { label: "WordPress", section: null },
+    { label: "Webflow", section: null },
+    { label: "Custom Sites", section: null },
   ],
   Company: [
     { label: "About", section: null },
     { label: "Careers", section: null },
-    { label: "Press", section: null },
     { label: "Contact", section: null },
   ],
-  Security: [
+  Legal: [
     { label: "Privacy", section: null },
     { label: "Terms", section: null },
-    { label: "GDPR", section: null },
-    { label: "SOC 2", section: null },
   ],
 };
 
@@ -59,13 +57,6 @@ export function Footer() {
     }
   };
 
-  const handleGetStarted = () => {
-    toast({
-      title: "Welcome to Juicebox!",
-      description: "Free trial coming soon. Book a demo to get early access!",
-    });
-  };
-
   return (
     <>
       <footer 
@@ -85,35 +76,41 @@ export function Footer() {
               className="text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 mb-6 tracking-tight"
               data-testid="text-footer-cta-heading"
             >
-              The future of recruiting<br />starts with Juicebox.
+              Your website is costing<br />you customers. Let's fix that.
             </h2>
             <p 
               className="text-lg text-gray-500 mb-8 max-w-2xl mx-auto"
               data-testid="text-footer-cta-subheading"
             >
-              Join thousands of recruiting teams who are already using AI to find better candidates faster.
+              Get a free site audit and see exactly where you're losing traffic, leads, and revenue.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button 
                 size="lg" 
                 className="bg-gray-900 hover:bg-gray-800 text-white px-8 uppercase tracking-wider cursor-pointer"
                 style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
-                onClick={handleGetStarted}
+                onClick={() => setIsDemoModalOpen(true)}
                 data-testid="button-footer-cta"
               >
-                GET STARTED FREE
+                BLOOM MY SITE
               </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
                 className="border-gray-300 text-gray-700 hover:bg-gray-100 px-8 uppercase tracking-wider cursor-pointer"
                 style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
-                onClick={() => setIsDemoModalOpen(true)}
+                onClick={() => {
+                  toast({
+                    title: "Free Site Audit",
+                    description: "Our free audit tool is launching soon. Get on the list!",
+                  });
+                }}
                 data-testid="button-footer-demo"
               >
-                BOOK A DEMO
+                FREE SITE AUDIT
               </Button>
             </div>
+            <p className="text-sm text-gray-400 mt-4">No contracts. No pressure. Just results.</p>
           </div>
         </motion.div>
 
@@ -127,13 +124,13 @@ export function Footer() {
                   style={{ fontFamily: "'VT323', monospace" }}
                   data-testid="link-footer-logo"
                 >
-                  <span className="text-[#9333EA]">JUICE</span><span className="text-gray-900">BOX</span>
+                  <span className="text-[#9333EA]">SITE</span><span className="text-gray-900">BLOOM</span>
                 </a>
                 <p 
                   className="text-gray-400 text-sm leading-relaxed"
                   data-testid="text-footer-tagline"
                 >
-                  The AI Recruiting Platform that helps you win the talent war.
+                  We turn underperforming websites into your hardest-working employee.
                 </p>
               </div>
 
@@ -169,7 +166,7 @@ export function Footer() {
                 className="text-gray-400 text-sm"
                 data-testid="text-footer-copyright"
               >
-                © 2025 Juicebox. All rights reserved.
+                &copy; 2025 Sitebloom. All rights reserved.
               </p>
               <div className="flex items-center gap-6">
                 <a

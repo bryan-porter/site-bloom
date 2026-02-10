@@ -1,0 +1,107 @@
+I already have the website layout and structure completed.
+
+Your task is to rewrite and refine all copy and UI microcopy so the entire site aligns with my brand:
+
+Sitebloom
+
+Sitebloom specializes in transforming outdated, slow, or poorly designed websites into modern, high-converting digital storefronts.
+
+Do NOT redesign the layout or suggest new sections.
+Work within the existing structure and improve:
+
+Headlines
+
+Subheadlines
+
+Body copy
+
+Call-to-actions
+
+Button text
+
+Microcopy
+
+Value propositions
+
+Make everything sharper, clearer, more confident, and conversion-focused.
+
+Brand Positioning
+
+Brand Name: Sitebloom
+Core Idea: We fix underperforming websites and help them grow.
+Tone: Bold, modern, confident, slightly witty (never cheesy).
+Goal: Increase urgency, clarity, and conversion intent.
+
+Avoid generic phrases like:
+
+“We build websites”
+
+“Digital solutions for your business”
+
+Use stronger language like:
+
+“Stop losing customers to outdated design.”
+
+“Your website should work harder.”
+
+“If it’s slow, confusing, or ugly — we fix it.”
+
+Messaging Direction
+
+The copy should:
+
+Speak directly to business owners
+
+Highlight pain points clearly (slow speed, bad UX, poor mobile design, low conversions)
+
+Position Sitebloom as the solution
+
+Emphasize measurable improvement (performance, conversions, growth)
+
+Be concise and high-impact
+
+Make headlines punchy.
+Keep paragraphs tight.
+Prioritize clarity over fluff.
+
+Buttons & CTAs
+
+Keep modern button styling with:
+
+Slight rounded corners
+
+Subtle hover animation
+
+Confident action-driven language
+
+Primary CTA must include:
+
+“Bloom My Site”
+
+Also generate 6–8 alternative high-converting CTA variations, such as:
+
+“Fix My Website”
+
+“Start My Transformation”
+
+“Upgrade My Site”
+
+“Rescue My Website”
+
+Include short supporting microcopy under CTAs if helpful (e.g., “Free audit. No pressure.”).
+
+Output Format
+
+Provide:
+
+Fully rewritten copy for each existing section (use placeholder labels like “Hero Section,” “About Section,” etc. if needed).
+
+Improved CTA language throughout.
+
+Microcopy suggestions (forms, buttons, testimonials, hover states).
+
+A short summary explaining the overall messaging shift.
+
+Do not suggest layout changes.
+Do not change the structure.
+Focus only on messaging and conversion refinement.

@@ -1,8 +1,16 @@
-# Juicebox AI Recruiting Platform
+# Sitebloom - Website Transformation Platform
 
 ## Overview
 
-This is a SaaS landing page for Juicebox, an AI-powered recruiting platform. The application is built as a full-stack TypeScript project with a React frontend and Express backend. The landing page showcases the platform's features including AI-powered talent search, CRM capabilities, and autonomous recruiting agents. The design follows a premium Juicebox.ai-inspired aesthetic with modern minimalism and strategic visual emphasis.
+This is a SaaS landing page for Sitebloom, a company that specializes in transforming outdated, slow, or poorly designed websites into modern, high-converting digital storefronts. The application is built as a full-stack TypeScript project with a React frontend and Express backend. The design follows a retro-techy aesthetic with VT323 DOS font, ASCII art effects, and alternating white/purple (#9333EA) section backgrounds.
+
+## Brand
+
+- **Brand Name**: Sitebloom
+- **Core Idea**: We fix underperforming websites and help them grow
+- **Tone**: Bold, modern, confident, slightly witty (never cheesy)
+- **Primary CTA**: "Bloom My Site"
+- **Demo credentials**: admin@sitebloom.com / demo123
 
 ## User Preferences
 
@@ -42,20 +50,37 @@ Preferred communication style: Simple, everyday language.
 │   └── src/
 │       ├── components/
 │       │   ├── landing/  # Landing page sections
+│       │   │   ├── Navbar.tsx        # Nav with SITEBLOOM logo, SERVICES/PRICING/WORK/RESULTS links
+│       │   │   ├── Hero.tsx          # ASCII grid bg, main headline + CTAs
+│       │   │   ├── LogoMarquee.tsx   # Purple strip with dev tool icons
+│       │   │   ├── ValueStatement.tsx # Large centered statement
+│       │   │   ├── FeatureBlock.tsx   # Tabbed features (Redesign/Performance/Growth)
+│       │   │   ├── AgentsGrid.tsx    # 6 service cards grid
+│       │   │   ├── SocialProof.tsx   # Platform badges (Shopify, WordPress, etc.)
+│       │   │   ├── Testimonials.tsx  # 4 client result cards
+│       │   │   ├── FAQ.tsx           # Accordion FAQ with CTA
+│       │   │   └── Footer.tsx        # CTA section + link columns
+│       │   ├── BookDemoModal.tsx     # "Bloom My Site" form modal
 │       │   └── ui/       # shadcn/ui components
 │       ├── hooks/        # Custom React hooks
 │       ├── lib/          # Utilities and query client
-│       └── pages/        # Page components
+│       └── pages/        # Page components (Home, SignIn, Dashboard)
 ├── server/           # Express backend
 ├── shared/           # Shared types and schemas
 └── migrations/       # Drizzle database migrations
 ```
 
 ### Design System
-- **Primary Accent**: Orange/Coral (#FF5A30) for CTAs and highlights
-- **Typography**: Inter font family with tight tracking for headlines
-- **Spacing**: Generous vertical rhythm with max-width constraints (5xl for hero, 7xl for content)
-- **Components**: Rounded corners (2xl for cards, full for buttons), subtle shadows with hover elevation
+- **Primary Accent**: Purple (#9333EA) for highlights and alternating backgrounds
+- **Typography**: VT323 (DOS-style monospace) for nav, labels, buttons; Inter for body
+- **Section Pattern**: Alternating white and purple (#9333EA) backgrounds
+- **Hero Effect**: ASCII keyboard character grid fading from white center to purple edges
+- **Components**: Rounded corners (lg for cards), subtle borders, hover transitions
+
+## Routes
+- `/` - Landing page (Home)
+- `/signin` - Sign in page
+- `/dashboard` - Protected dashboard
 
 ## External Dependencies
 

@@ -15,11 +15,13 @@ export function ValueStatement() {
           className="text-3xl md:text-4xl lg:text-5xl font-medium text-gray-900 leading-tight tracking-tight text-center"
           data-testid="text-value-statement"
         >
-          <span className="text-gray-400">Recruiting is being rewritten.</span>{" "}
-          <span className="text-gray-900">AI-led, precision-driven, and built for teams that demand{" "}</span>
+          <span className="text-gray-400">Stop losing customers to bad design.</span>{" "}
+          <span className="text-gray-900">We rebuild websites for{" "}</span>
           <span className="text-[#9333EA]">speed</span>
-          <span className="text-gray-900"> and </span>
-          <span className="text-[#9333EA]">results</span>
+          <span className="text-gray-900">, </span>
+          <span className="text-[#9333EA]">clarity</span>
+          <span className="text-gray-900">, and </span>
+          <span className="text-[#9333EA]">conversions</span>
           <span className="text-gray-900">.</span>
         </motion.p>
       </div>

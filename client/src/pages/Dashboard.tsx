@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, Search, Bot, TrendingUp, LogOut } from "lucide-react";
+import { Globe, Gauge, TrendingUp, Eye, LogOut } from "lucide-react";
 
 export default function Dashboard() {
   const [, setLocation] = useLocation();
   const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
-    const auth = localStorage.getItem("juicebox_auth");
+    const auth = localStorage.getItem("sitebloom_auth");
     if (!auth) {
       setLocation("/signin");
       return;
@@ -23,15 +23,15 @@ export default function Dashboard() {
   }, [setLocation]);
 
   const handleLogout = () => {
-    localStorage.removeItem("juicebox_auth");
+    localStorage.removeItem("sitebloom_auth");
     setLocation("/");
   };
 
   const stats = [
-    { label: "Active Searches", value: "12", icon: Search, change: "+3 this week" },
-    { label: "Candidates Found", value: "847", icon: Users, change: "+124 this week" },
-    { label: "Active Agents", value: "5", icon: Bot, change: "2 running now" },
-    { label: "Response Rate", value: "34%", icon: TrendingUp, change: "+5% vs last month" },
+    { label: "Sites Managed", value: "4", icon: Globe, change: "+1 this month" },
+    { label: "Avg. Page Speed", value: "1.8s", icon: Gauge, change: "Down from 5.2s" },
+    { label: "Conversion Rate", value: "4.7%", icon: TrendingUp, change: "+2.1% vs last quarter" },
+    { label: "Monthly Visitors", value: "12.4K", icon: Eye, change: "+38% vs last month" },
   ];
 
   return (
@@ -44,7 +44,7 @@ export default function Dashboard() {
             style={{ fontFamily: "'VT323', monospace" }}
             data-testid="link-dashboard-logo"
           >
-            <span className="text-[#9333EA]">JUICE</span><span className="text-gray-900">BOX</span>
+            <span className="text-[#9333EA]">SITE</span><span className="text-gray-900">BLOOM</span>
           </a>
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-600" data-testid="text-user-email">{userEmail}</span>
@@ -73,7 +73,7 @@ export default function Dashboard() {
             DASHBOARD
           </h1>
           <p className="text-gray-600" data-testid="text-dashboard-subtitle">
-            Welcome back! Here's your recruiting overview.
+            Your site performance at a glance.
           </p>
         </div>
 
@@ -107,15 +107,15 @@ export default function Dashboard() {
             >
               RECENT ACTIVITY
             </CardTitle>
-            <CardDescription>Your latest recruiting actions</CardDescription>
+            <CardDescription>Latest updates across your sites</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {[
-                { action: "Agent completed outreach", target: "Senior Frontend Developer search", time: "2 hours ago" },
-                { action: "New candidate response", target: "John Smith - Product Manager", time: "4 hours ago" },
-                { action: "Search updated", target: "Backend Engineer - Remote", time: "Yesterday" },
-                { action: "Agent started", target: "Data Scientist outreach campaign", time: "2 days ago" },
+                { action: "Speed optimization complete", target: "mybusiness.com - Load time reduced to 1.4s", time: "2 hours ago" },
+                { action: "New conversion recorded", target: "Contact form submission from Google Ads", time: "4 hours ago" },
+                { action: "Mobile redesign deployed", target: "mybusiness.com/shop - New checkout flow live", time: "Yesterday" },
+                { action: "SEO audit finished", target: "12 issues found, 8 auto-fixed", time: "2 days ago" },
               ].map((activity, index) => (
                 <div 
                   key={index} 

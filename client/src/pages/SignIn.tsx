@@ -27,19 +27,16 @@ export default function SignIn() {
 
     setIsLoading(true);
 
-    // Simulate API validation call
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    // Check against environment variables or use demo credentials
-    const validEmail = "admin@juicebox.ai";
+    const validEmail = "admin@sitebloom.com";
     const validPassword = "demo123";
 
     if (formData.email === validEmail && formData.password === validPassword) {
-      // Store auth state
-      localStorage.setItem("juicebox_auth", JSON.stringify({ email: formData.email, loggedIn: true }));
+      localStorage.setItem("sitebloom_auth", JSON.stringify({ email: formData.email, loggedIn: true }));
       setLocation("/dashboard");
     } else {
-      setError("Invalid email or password. Try admin@juicebox.ai / demo123");
+      setError("Invalid email or password. Try admin@sitebloom.com / demo123");
       setIsLoading(false);
     }
   };
@@ -54,7 +51,7 @@ export default function SignIn() {
             style={{ fontFamily: "'VT323', monospace" }}
             data-testid="link-signin-logo"
           >
-            <span className="text-[#9333EA]">JUICE</span><span className="text-gray-900">BOX</span>
+            <span className="text-[#9333EA]">SITE</span><span className="text-gray-900">BLOOM</span>
           </a>
           <CardTitle 
             className="text-2xl"
@@ -64,7 +61,7 @@ export default function SignIn() {
             SIGN IN
           </CardTitle>
           <CardDescription data-testid="text-signin-description">
-            Enter your credentials to access your account
+            Access your Sitebloom dashboard
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -80,7 +77,7 @@ export default function SignIn() {
               <Input
                 id="email"
                 type="email"
-                placeholder="admin@juicebox.ai"
+                placeholder="admin@sitebloom.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 data-testid="input-signin-email"
@@ -115,7 +112,7 @@ export default function SignIn() {
             </Button>
           </form>
           <p className="text-center text-sm text-gray-500 mt-4" data-testid="text-signin-hint">
-            Demo credentials: admin@juicebox.ai / demo123
+            Demo credentials: admin@sitebloom.com / demo123
           </p>
         </CardContent>
       </Card>

@@ -1,36 +1,36 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, BarChart3, Send } from "lucide-react";
+import { Paintbrush, Gauge, LineChart } from "lucide-react";
 
 const features = [
   {
-    id: "search",
-    label: "SEARCH",
-    icon: Search,
-    title: "AI-Powered Talent Search",
-    description: "Search across 800M+ profiles with natural language. Our AI understands context, skills, experience, and cultural fit to surface the perfect candidates.",
-    highlights: ["Natural language queries", "800M+ profiles", "Contextual matching"],
+    id: "redesign",
+    label: "REDESIGN",
+    icon: Paintbrush,
+    title: "Modern Redesign That Converts",
+    description: "We strip out the clutter and rebuild your site with clean layouts, sharp visuals, and user flows engineered to turn visitors into customers.",
+    highlights: ["Conversion-focused layouts", "Mobile-first design", "Brand-aligned visuals"],
   },
   {
-    id: "insights",
-    label: "INSIGHTS",
-    icon: BarChart3,
-    title: "Real-Time Market Insights",
-    description: "Get instant access to compensation benchmarks, talent pool analytics, and competitive intelligence for any role or market.",
-    highlights: ["Compensation data", "Market trends", "Competitive intel"],
+    id: "performance",
+    label: "PERFORMANCE",
+    icon: Gauge,
+    title: "Speed That Keeps Visitors Around",
+    description: "Slow sites bleed traffic. We optimize every asset, script, and server call to deliver sub-2-second load times that search engines reward.",
+    highlights: ["Core Web Vitals pass", "Sub-2s load times", "SEO boost"],
   },
   {
-    id: "engagement",
-    label: "ENGAGEMENT",
-    icon: Send,
-    title: "Automated Outreach That Works",
-    description: "Craft personalized sequences that feel human. Our AI writes messages that resonate and drive 3x higher response rates.",
-    highlights: ["Personalized at scale", "3x response rates", "Smart sequencing"],
+    id: "growth",
+    label: "GROWTH",
+    icon: LineChart,
+    title: "Built-In Growth Engine",
+    description: "Every page is wired for results. From strategic CTAs to analytics-driven iteration, your site becomes a 24/7 revenue machine.",
+    highlights: ["A/B tested CTAs", "Analytics dashboard", "Ongoing optimization"],
   },
 ];
 
 export function FeaturesSection() {
-  const [activeTab, setActiveTab] = useState("search");
+  const [activeTab, setActiveTab] = useState("redesign");
   const activeFeature = features.find((f) => f.id === activeTab) || features[0];
 
   return (
@@ -63,13 +63,13 @@ export function FeaturesSection() {
             style={{ fontFamily: "'VT323', monospace" }}
             data-testid="text-features-label"
           >
-            [01] FEATURES
+            [01] WHAT WE DO
           </span>
           <h2 
             className="text-4xl md:text-5xl lg:text-6xl font-medium text-white tracking-tight"
             data-testid="text-features-heading"
           >
-            How it works: Humans + Agents
+            Fix it. Speed it up. Watch it grow.
           </h2>
         </motion.div>
 

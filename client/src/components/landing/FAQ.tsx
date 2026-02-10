@@ -6,34 +6,34 @@ import { BookDemoModal } from "@/components/BookDemoModal";
 
 const faqs = [
   {
-    id: "who-can-use",
-    question: "Who can use Juicebox?",
-    answer: "Juicebox is designed for recruiting teams of all sizes, from startups to enterprise companies. Whether you're a solo recruiter or a large talent acquisition team, our platform scales to meet your needs.",
+    id: "who-is-this-for",
+    question: "Who is Sitebloom for?",
+    answer: "Any business owner who knows their website isn't pulling its weight. Whether you're a local shop, e-commerce brand, or professional service firm, if your site is slow, outdated, or not converting, we're built for you.",
   },
   {
-    id: "free-trial",
-    question: "Can I try for free?",
-    answer: "Yes! We offer a 14-day free trial with full access to all features. No credit card required. Start finding amazing candidates today.",
+    id: "how-long",
+    question: "How long does a transformation take?",
+    answer: "Most projects launch in 2-4 weeks. We move fast without cutting corners. You'll see initial designs within days, not months.",
   },
   {
-    id: "global-data",
-    question: "Global data coverage?",
-    answer: "Absolutely. Our database includes over 800 million professional profiles from around the world. We have strong coverage in North America, Europe, Asia, and beyond.",
+    id: "what-platforms",
+    question: "Do you work with my current platform?",
+    answer: "Yes. We work across all major platforms, including Shopify, WordPress, Webflow, Squarespace, WooCommerce, and custom-built sites. If it's on the web, we can fix it.",
   },
   {
-    id: "ai-learning",
-    question: "How does the AI learn my preferences?",
-    answer: "Our AI analyzes your hiring patterns, the candidates you engage with, and your feedback to continuously improve recommendations. The more you use Juicebox, the smarter it gets.",
+    id: "how-much",
+    question: "What does it cost?",
+    answer: "Every project is scoped individually based on complexity. We start with a free audit so you know exactly what needs fixing before committing a dollar. No surprises, no hidden fees.",
   },
   {
-    id: "integrations",
-    question: "What integrations do you support?",
-    answer: "We integrate with major ATS platforms like Greenhouse, Lever, Workday, and Ashby, as well as communication tools like Gmail, Outlook, and Slack. We're always adding new integrations.",
+    id: "what-if-happy",
+    question: "What if I'm happy with my current design?",
+    answer: "Great design is just one piece. If your site looks good but loads slowly, ranks poorly, or doesn't convert, we can focus purely on performance, SEO, and conversion optimization without touching the design.",
   },
   {
-    id: "security",
-    question: "Is my data secure?",
-    answer: "Yes, security is our top priority. We're SOC 2 Type II certified and GDPR compliant. All data is encrypted at rest and in transit.",
+    id: "ongoing-support",
+    question: "Do you offer ongoing support?",
+    answer: "Absolutely. We offer monthly growth plans that include performance monitoring, content updates, A/B testing, and ongoing optimization. Your site keeps improving long after launch.",
   },
 ];
 
@@ -125,13 +125,13 @@ export function FAQ() {
                 className="text-4xl md:text-5xl font-medium text-white mb-6 tracking-tight"
                 data-testid="text-faq-heading"
               >
-                Your questions,<br />answered
+                Got questions?<br />We've got answers.
               </h2>
               <p 
                 className="text-lg text-white/70 mb-8 leading-relaxed"
                 data-testid="text-faq-subheading"
               >
-                Can't find what you're looking for? Our team is here to help you get started.
+                Still not sure? Let's talk. We'll audit your site for free and show you exactly what's holding it back.
               </p>
               <Button 
                 size="lg" 
@@ -140,7 +140,7 @@ export function FAQ() {
                 onClick={() => setIsDemoModalOpen(true)}
                 data-testid="button-faq-demo"
               >
-                BOOK A DEMO
+                FIX MY WEBSITE
               </Button>
             </motion.div>
 

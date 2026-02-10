@@ -7,10 +7,10 @@ import { BookDemoModal } from "@/components/BookDemoModal";
 import { useToast } from "@/hooks/use-toast";
 
 const navLinks = [
-  { label: "FEATURES", href: "#features", hasDropdown: true, hasSection: true },
+  { label: "SERVICES", href: "#features", hasDropdown: true, hasSection: true },
   { label: "PRICING", href: "#pricing", hasDropdown: false, hasSection: false },
-  { label: "RESOURCES", href: "#resources", hasDropdown: true, hasSection: false },
-  { label: "CUSTOMERS", href: "#testimonials", hasDropdown: false, hasSection: true },
+  { label: "WORK", href: "#resources", hasDropdown: true, hasSection: false },
+  { label: "RESULTS", href: "#testimonials", hasDropdown: false, hasSection: true },
 ];
 
 export function Navbar() {
@@ -49,7 +49,7 @@ export function Navbar() {
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
               <a href="/" className="text-2xl font-bold tracking-tight text-gray-900 cursor-pointer" style={{ fontFamily: "'VT323', monospace" }} data-testid="link-logo">
-                <span className="text-[#9333EA]">JUICE</span>BOX
+                <span className="text-[#9333EA]">SITE</span>BLOOM
               </a>
             </div>
 
@@ -85,7 +85,7 @@ export function Navbar() {
                 onClick={() => setIsDemoModalOpen(true)}
                 data-testid="button-demo"
               >
-                BOOK A DEMO
+                BLOOM MY SITE
               </Button>
             </div>
 
@@ -143,7 +143,7 @@ export function Navbar() {
                     }}
                     data-testid="button-mobile-demo"
                   >
-                    BOOK A DEMO
+                    BLOOM MY SITE
                   </Button>
                 </div>
               </div>

@@ -23,7 +23,7 @@ export function BookDemoModal({ open, onOpenChange }: BookDemoModalProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    company: "",
+    website: "",
     message: "",
   });
   const { toast } = useToast();
@@ -33,8 +33,8 @@ export function BookDemoModal({ open, onOpenChange }: BookDemoModalProps) {
     
     if (!formData.name || !formData.email) {
       toast({
-        title: "Error",
-        description: "Please fill in all required fields.",
+        title: "Missing info",
+        description: "We need your name and email to get started.",
         variant: "destructive",
       });
       return;
@@ -42,19 +42,17 @@ export function BookDemoModal({ open, onOpenChange }: BookDemoModalProps) {
 
     setIsSubmitting(true);
 
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     setIsSubmitting(false);
     onOpenChange(false);
     
     toast({
-      title: "Demo Request Submitted",
-      description: "We'll be in touch within 24 hours to schedule your demo.",
+      title: "You're in! We'll be in touch.",
+      description: "Expect a free site audit and action plan within 48 hours.",
     });
 
-    // Reset form
-    setFormData({ name: "", email: "", company: "", message: "" });
+    setFormData({ name: "", email: "", website: "", message: "" });
   };
 
   return (
@@ -66,49 +64,49 @@ export function BookDemoModal({ open, onOpenChange }: BookDemoModalProps) {
             style={{ fontFamily: "'VT323', monospace" }}
             data-testid="text-modal-title"
           >
-            BOOK A DEMO
+            BLOOM MY SITE
           </DialogTitle>
           <DialogDescription data-testid="text-modal-description">
-            Fill out the form below and we'll reach out to schedule a personalized demo of Juicebox.
+            Tell us about your site. We'll send you a free audit with specific recommendations, no strings attached.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Name *</Label>
+            <Label htmlFor="name">Your Name *</Label>
             <Input
               id="name"
-              placeholder="John Doe"
+              placeholder="Jane Smith"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               data-testid="input-demo-name"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="email">Work Email *</Label>
+            <Label htmlFor="email">Email *</Label>
             <Input
               id="email"
               type="email"
-              placeholder="john@company.com"
+              placeholder="jane@mybusiness.com"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               data-testid="input-demo-email"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="company">Company</Label>
+            <Label htmlFor="website">Your Website URL</Label>
             <Input
-              id="company"
-              placeholder="Acme Inc."
-              value={formData.company}
-              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+              id="website"
+              placeholder="https://mybusiness.com"
+              value={formData.website}
+              onChange={(e) => setFormData({ ...formData, website: e.target.value })}
               data-testid="input-demo-company"
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="message">What are you looking for?</Label>
+            <Label htmlFor="message">What's not working?</Label>
             <Textarea
               id="message"
-              placeholder="Tell us about your recruiting needs..."
+              placeholder="Slow load times, low conversions, outdated look..."
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               className="resize-none"
@@ -125,12 +123,13 @@ export function BookDemoModal({ open, onOpenChange }: BookDemoModalProps) {
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                SUBMITTING...
+                SENDING...
               </>
             ) : (
-              "REQUEST DEMO"
+              "GET MY FREE AUDIT"
             )}
           </Button>
+          <p className="text-center text-xs text-gray-400">Free audit. No credit card. Results in 48 hours.</p>
         </form>
       </DialogContent>
     </Dialog>

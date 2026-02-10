@@ -74,10 +74,10 @@ export function Hero() {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const { toast } = useToast();
 
-  const handleTryFree = () => {
+  const handleFreeAudit = () => {
     toast({
-      title: "Welcome to Juicebox!",
-      description: "Free trial coming soon. Book a demo to get early access!",
+      title: "Free Site Audit",
+      description: "Our free audit tool is launching soon. Get on the list!",
     });
   };
 
@@ -104,7 +104,7 @@ export function Hero() {
             data-testid="badge-hero-announcement"
           >
             <span className="px-2 py-0.5 bg-gray-900 rounded text-white text-xs" style={{ fontFamily: "'VT323', monospace" }}>NEW</span>
-            TRY JUICEBOX AGENTS &gt;
+            SEE HOW WE TRANSFORM SITES &gt;
           </motion.a>
 
           <motion.h1
@@ -114,7 +114,7 @@ export function Hero() {
             className="text-5xl md:text-6xl lg:text-7xl font-medium text-gray-900 tracking-tight leading-[1.1] mb-6"
             data-testid="text-hero-headline"
           >
-            Win the talent war.
+            Your website should work harder.
           </motion.h1>
 
           <motion.p
@@ -124,7 +124,7 @@ export function Hero() {
             className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed"
             data-testid="text-hero-subhead"
           >
-            Juicebox is the <span className="text-gray-900 font-medium">AI Recruiting Platform</span> that understands who you're looking for. Level up your team with Search, CRM, and Agents.
+            If it's slow, confusing, or ugly — <span className="text-gray-900 font-medium">we fix it.</span> Sitebloom turns underperforming websites into modern, high-converting digital storefronts.
           </motion.p>
 
           <motion.div
@@ -137,22 +137,32 @@ export function Hero() {
               size="lg" 
               className="bg-gray-900 hover:bg-gray-800 text-white px-8 uppercase tracking-wider cursor-pointer"
               style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
-              onClick={handleTryFree}
+              onClick={() => setIsDemoModalOpen(true)}
               data-testid="button-hero-try"
             >
-              TRY FOR FREE
+              BLOOM MY SITE
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
               className="border-gray-300 text-gray-700 hover:bg-gray-100 px-8 uppercase tracking-wider cursor-pointer"
               style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
-              onClick={() => setIsDemoModalOpen(true)}
+              onClick={handleFreeAudit}
               data-testid="button-hero-demo"
             >
-              BOOK A DEMO
+              FREE SITE AUDIT
             </Button>
           </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="text-sm text-gray-400 mt-4"
+            data-testid="text-hero-microcopy"
+          >
+            Free audit. No pressure.
+          </motion.p>
         </div>
 
         <div 

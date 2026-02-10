@@ -1,140 +1,139 @@
 import { motion } from "framer-motion";
-import { Zap, Brain, MessageSquare, Target, Clock, TrendingUp } from "lucide-react";
+import { Paintbrush, Gauge, Code, Smartphone, ShieldCheck, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { BookDemoModal } from "@/components/BookDemoModal";
+import { useState } from "react";
 
-const agents = [
+const services = [
   {
-    id: "search-agent",
-    title: "Search Agent",
-    description: "Autonomous candidate sourcing that runs 24/7. Set your criteria and let AI find perfect matches while you sleep.",
-    icon: Zap,
+    id: "redesign",
+    title: "Full-Site Redesign",
+    description: "From wireframe to launch. We tear down what's broken and rebuild your site with modern design, clear navigation, and conversion-focused layouts.",
+    icon: Paintbrush,
   },
   {
-    id: "learning-agent",
-    title: "Learning Agent",
-    description: "Gets smarter with every hire. Learns your preferences, team dynamics, and what makes candidates successful.",
-    icon: Brain,
+    id: "speed",
+    title: "Speed Optimization",
+    description: "Slow pages kill sales. We audit every bottleneck and deliver blazing-fast load times that keep visitors engaged and search engines happy.",
+    icon: Gauge,
   },
   {
-    id: "outreach-agent",
-    title: "Outreach Agent",
-    description: "Personalized messaging at scale. Crafts compelling sequences that feel human and drive 3x response rates.",
-    icon: MessageSquare,
+    id: "development",
+    title: "Custom Development",
+    description: "Need something beyond templates? We build custom features, integrations, and functionality tailored to how your business actually works.",
+    icon: Code,
   },
   {
-    id: "matching-agent",
-    title: "Matching Agent",
-    description: "Beyond keyword matching. Understands context, career trajectories, and cultural fit for precise recommendations.",
-    icon: Target,
+    id: "mobile",
+    title: "Mobile Overhaul",
+    description: "Over half your traffic is mobile. We make sure every tap, scroll, and checkout feels effortless on any screen size.",
+    icon: Smartphone,
   },
   {
-    id: "scheduling-agent",
-    title: "Scheduling Agent",
-    description: "Eliminates scheduling friction. Coordinates interviews across time zones with smart calendar optimization.",
-    icon: Clock,
+    id: "seo",
+    title: "SEO & Visibility",
+    description: "Beautiful sites that nobody finds are useless. We bake in technical SEO, structured data, and content strategy from day one.",
+    icon: ShieldCheck,
   },
   {
-    id: "analytics-agent",
-    title: "Analytics Agent",
-    description: "Real-time pipeline insights. Track conversion rates, identify bottlenecks, and optimize your hiring funnel.",
-    icon: TrendingUp,
+    id: "analytics",
+    title: "Analytics & Growth",
+    description: "Data-driven decisions, not guesswork. We set up tracking, heatmaps, and dashboards so you know exactly what's working and what's not.",
+    icon: BarChart3,
   },
 ];
 
 export function AgentsGrid() {
-  const { toast } = useToast();
-
-  const handleTryAgents = () => {
-    toast({
-      title: "Welcome to Juicebox Agents!",
-      description: "Free trial coming soon. We'll notify you when it's ready!",
-    });
-  };
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
 
   return (
-    <section 
-      className="py-24 px-4 sm:px-6 lg:px-8 relative bg-white"
-      id="agents"
-      data-testid="section-agents"
-    >
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <span 
-            className="text-[#9333EA] text-sm uppercase tracking-wider mb-4 block" 
-            style={{ fontFamily: "'VT323', monospace" }}
-            data-testid="text-agents-label"
+    <>
+      <section 
+        className="py-24 px-4 sm:px-6 lg:px-8 relative bg-white"
+        id="agents"
+        data-testid="section-agents"
+      >
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
           >
-            [02] AGENTS
-          </span>
-          <h2 
-            className="text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 mb-6 tracking-tight"
-            data-testid="text-agents-heading"
-          >
-            Deploy AI Agents for every task
-          </h2>
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto" data-testid="text-agents-subheading">
-            Autonomous agents that work around the clock to find, engage, and hire your next great team member.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {agents.map((agent, index) => (
-            <motion.div
-              key={agent.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative bg-gray-50 rounded-lg p-6 border border-gray-200 hover:border-[#9333EA]/30 hover:bg-purple-50/50 transition-all duration-300 cursor-pointer"
-              data-testid={`card-agent-${agent.id}`}
+            <span 
+              className="text-[#9333EA] text-sm uppercase tracking-wider mb-4 block" 
+              style={{ fontFamily: "'VT323', monospace" }}
+              data-testid="text-agents-label"
             >
-              <div 
-                className="w-12 h-12 rounded-lg bg-[#9333EA]/10 flex items-center justify-center mb-5 group-hover:bg-[#9333EA]/20 transition-colors duration-300"
-                data-testid={`icon-agent-${agent.id}`}
-              >
-                <agent.icon className="w-6 h-6 text-[#9333EA]" />
-              </div>
-              <h3 
-                className="text-xl font-semibold text-gray-900 mb-3"
-                data-testid={`text-agent-title-${agent.id}`}
-              >
-                {agent.title}
-              </h3>
-              <p 
-                className="text-gray-500 leading-relaxed text-sm"
-                data-testid={`text-agent-description-${agent.id}`}
-              >
-                {agent.description}
-              </p>
-            </motion.div>
-          ))}
-        </div>
+              [02] SERVICES
+            </span>
+            <h2 
+              className="text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 mb-6 tracking-tight"
+              data-testid="text-agents-heading"
+            >
+              Everything your site needs to bloom
+            </h2>
+            <p className="text-lg text-gray-500 max-w-2xl mx-auto" data-testid="text-agents-subheading">
+              We handle the full transformation. You handle the growth.
+            </p>
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <Button 
-            size="lg"
-            className="bg-gray-900 hover:bg-gray-800 text-white px-8 uppercase tracking-wider cursor-pointer"
-            style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
-            onClick={handleTryAgents}
-            data-testid="button-agents-cta"
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group relative bg-gray-50 rounded-lg p-6 border border-gray-200 hover:border-[#9333EA]/30 hover:bg-purple-50/50 transition-all duration-300 cursor-pointer"
+                data-testid={`card-agent-${service.id}`}
+              >
+                <div 
+                  className="w-12 h-12 rounded-lg bg-[#9333EA]/10 flex items-center justify-center mb-5 group-hover:bg-[#9333EA]/20 transition-colors duration-300"
+                  data-testid={`icon-agent-${service.id}`}
+                >
+                  <service.icon className="w-6 h-6 text-[#9333EA]" />
+                </div>
+                <h3 
+                  className="text-xl font-semibold text-gray-900 mb-3"
+                  data-testid={`text-agent-title-${service.id}`}
+                >
+                  {service.title}
+                </h3>
+                <p 
+                  className="text-gray-500 leading-relaxed text-sm"
+                  data-testid={`text-agent-description-${service.id}`}
+                >
+                  {service.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
           >
-            TRY AGENTS FOR FREE
-          </Button>
-        </motion.div>
-      </div>
-    </section>
+            <Button 
+              size="lg"
+              className="bg-gray-900 hover:bg-gray-800 text-white px-8 uppercase tracking-wider cursor-pointer"
+              style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
+              onClick={() => setIsDemoModalOpen(true)}
+              data-testid="button-agents-cta"
+            >
+              START MY TRANSFORMATION
+            </Button>
+            <p className="text-sm text-gray-400 mt-3">No commitment. Let's talk about your site.</p>
+          </motion.div>
+        </div>
+      </section>
+
+      <BookDemoModal open={isDemoModalOpen} onOpenChange={setIsDemoModalOpen} />
+    </>
   );
 }

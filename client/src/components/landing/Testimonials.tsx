@@ -2,36 +2,36 @@ import { motion } from "framer-motion";
 
 const testimonials = [
   {
-    id: "cointracker",
-    company: "CoinTracker",
-    headline: "How CoinTracker Saves 30+ Hours Weekly",
-    quote: "Juicebox transformed our recruiting process. We went from spending days sourcing to finding top candidates in hours. The AI actually understands what we're looking for.",
+    id: "greenfield",
+    company: "Greenfield Co.",
+    headline: "From 6-Second Load Time to Under 2",
+    quote: "Our old site was embarrassing. Sitebloom rebuilt it from scratch and our bounce rate dropped 47% in the first month. Customers actually stay now.",
     author: "Sarah Martinez",
-    role: "Head of Talent",
+    role: "Founder",
   },
   {
-    id: "montecarlo",
-    company: "Monte Carlo",
-    headline: "How Monte Carlo Filled 2 Roles in 3 Weeks",
-    quote: "The AI agents are incredible. They found candidates we never would have discovered on our own. Our time-to-hire dropped by 60%.",
+    id: "peakfit",
+    company: "PeakFit Studio",
+    headline: "Online Bookings Up 3x After Redesign",
+    quote: "We were losing clients to competitors with better websites. Sitebloom gave us a site that actually converts. Membership signups tripled.",
     author: "Michael Chen",
-    role: "VP Engineering",
+    role: "Owner",
   },
   {
-    id: "figma",
-    company: "Figma",
-    headline: "How Figma Reduced Time-to-Hire by 60%",
-    quote: "The quality of candidates from Juicebox is unmatched. Our hiring managers are thrilled with every shortlist we send them.",
+    id: "luxehome",
+    company: "LuxeHome",
+    headline: "Mobile Revenue Went from $0 to $40K/Month",
+    quote: "Our old site was basically unusable on phones. Sitebloom rebuilt everything mobile-first and we unlocked an entire revenue channel we were missing.",
     author: "Emily Rodriguez",
-    role: "Recruiting Lead",
+    role: "E-Commerce Director",
   },
   {
-    id: "stripe",
-    company: "Stripe",
-    headline: "How Stripe Scaled Their Engineering Team",
-    quote: "Juicebox gave us superpowers. We scaled from 50 to 200 engineers in just one year without compromising on quality.",
+    id: "arcvault",
+    company: "ArcVault",
+    headline: "SEO Rankings Jumped 32 Positions in 60 Days",
+    quote: "Sitebloom didn't just make our site look better. They rebuilt the architecture so Google actually finds us. Organic traffic is up 200%.",
     author: "David Kim",
-    role: "Engineering Director",
+    role: "Marketing Lead",
   },
 ];
 
@@ -55,16 +55,16 @@ export function Testimonials() {
             style={{ fontFamily: "'VT323', monospace" }}
             data-testid="text-testimonials-label"
           >
-            [03] CUSTOMERS
+            [03] RESULTS
           </span>
           <h2 
             className="text-4xl md:text-5xl lg:text-6xl font-medium text-gray-900 mb-6 tracking-tight"
             data-testid="text-testimonials-heading"
           >
-            How top teams win with Juicebox
+            Real businesses. Real transformations.
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto" data-testid="text-testimonials-subheading">
-            Join hundreds of companies that trust Juicebox to build world-class teams.
+            We don't just redesign websites. We fix what's broken and build what's missing.
           </p>
         </motion.div>
 
