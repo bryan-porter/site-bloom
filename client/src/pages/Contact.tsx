@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { BookDemoModal } from "@/components/BookDemoModal";
 import { useToast } from "@/hooks/use-toast";
+import { readErrorMessage } from "@/lib/api";
 import { Mail, MessageSquare, Clock } from "lucide-react";
 import { Link } from "wouter";
 
@@ -25,22 +26,34 @@ export default function Contact() {
       website: formData.get("website"),
       message: formData.get("message"),
     };
+    console.log("[forms:contact] submit started", {
+      hasName: Boolean(data.name),
+      hasEmail: Boolean(data.email),
+      hasWebsite: Boolean(data.website),
+      hasMessage: Boolean(data.message),
+    });
 
     try {
+      console.log("[forms:contact] sending request", { endpoint: "/api/contact" });
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      console.log("[forms:contact] response received", {
+        status: response.status,
+        ok: response.ok,
+      });
 
       if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.message || "Failed to submit");
+        throw new Error(await readErrorMessage(response, "Failed to submit"));
       }
 
+      console.log("[forms:contact] submit succeeded");
       toast({ title: "Message Sent!", description: "We will get back to you soon." });
       form.reset();
     } catch (error) {
+      console.error("[forms:contact] submit failed", error);
       toast({
         title: "Something went wrong",
         description: error instanceof Error ? error.message : "Please try again.",

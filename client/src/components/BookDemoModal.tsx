@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
+import { readErrorMessage } from "@/lib/api";
 import { Loader2 } from "lucide-react";
 
 interface BookDemoModalProps {
@@ -41,19 +42,30 @@ export function BookDemoModal({ open, onOpenChange }: BookDemoModalProps) {
     }
 
     setIsSubmitting(true);
+    console.log("[forms:book-demo] submit started", {
+      hasName: Boolean(formData.name),
+      hasEmail: Boolean(formData.email),
+      hasWebsite: Boolean(formData.website),
+      hasMessage: Boolean(formData.message),
+    });
 
     try {
+      console.log("[forms:book-demo] sending request", { endpoint: "/api/book-demo" });
       const response = await fetch("/api/book-demo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+      console.log("[forms:book-demo] response received", {
+        status: response.status,
+        ok: response.ok,
+      });
 
       if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.message || "Failed to submit");
+        throw new Error(await readErrorMessage(response, "Failed to submit"));
       }
 
+      console.log("[forms:book-demo] submit succeeded");
       onOpenChange(false);
       toast({
         title: "You're in! We'll be in touch.",
@@ -61,6 +73,7 @@ export function BookDemoModal({ open, onOpenChange }: BookDemoModalProps) {
       });
       setFormData({ name: "", email: "", website: "", message: "" });
     } catch (error) {
+      console.error("[forms:book-demo] submit failed", error);
       toast({
         title: "Something went wrong",
         description: error instanceof Error ? error.message : "Please try again.",

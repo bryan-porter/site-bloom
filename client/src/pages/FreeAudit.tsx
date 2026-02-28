@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { readErrorMessage } from "@/lib/api";
 import { CheckCircle, Gauge, Search, Smartphone, Shield } from "lucide-react";
 
 export default function FreeAudit() {
@@ -22,22 +23,34 @@ export default function FreeAudit() {
       email: formData.get("email"),
       notes: formData.get("notes"),
     };
+    console.log("[forms:free-audit] submit started", {
+      hasWebsiteUrl: Boolean(data.websiteUrl),
+      hasName: Boolean(data.name),
+      hasEmail: Boolean(data.email),
+      hasNotes: Boolean(data.notes),
+    });
 
     try {
+      console.log("[forms:free-audit] sending request", { endpoint: "/api/free-audit" });
       const response = await fetch("/api/free-audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      console.log("[forms:free-audit] response received", {
+        status: response.status,
+        ok: response.ok,
+      });
 
       if (!response.ok) {
-        const err = await response.json();
-        throw new Error(err.message || "Failed to submit");
+        throw new Error(await readErrorMessage(response, "Failed to submit"));
       }
 
+      console.log("[forms:free-audit] submit succeeded");
       setIsSubmitted(true);
       toast({ title: "Audit Request Submitted!", description: "We will send your free audit within 48 hours." });
     } catch (error) {
+      console.error("[forms:free-audit] submit failed", error);
       toast({
         title: "Something went wrong",
         description: error instanceof Error ? error.message : "Please try again or email us directly.",
