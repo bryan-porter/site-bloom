@@ -48,7 +48,7 @@ export function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
-              <a href="/" className="text-2xl font-bold tracking-tight text-gray-900 cursor-pointer" style={{ fontFamily: "'VT323', monospace" }} data-testid="link-logo">
+              <a href="/" className="text-2xl font-bold tracking-tight text-gray-900 cursor-pointer" data-testid="link-logo">
                 <span className="text-[#9333EA]">SITE</span>BLOOM
               </a>
             </div>
@@ -60,7 +60,7 @@ export function Navbar() {
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link)}
                   className="flex items-center gap-1 px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors text-sm tracking-wider cursor-pointer"
-                  style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
+                 
                   data-testid={`link-nav-${link.label.toLowerCase()}`}
                 >
                   {link.label}
@@ -73,7 +73,7 @@ export function Navbar() {
               <Button 
                 variant="ghost" 
                 className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 uppercase tracking-wider cursor-pointer"
-                style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
+               
                 onClick={handleSignIn}
                 data-testid="button-signin"
               >
@@ -81,7 +81,7 @@ export function Navbar() {
               </Button>
               <Button 
                 className="bg-gray-900 hover:bg-gray-800 text-white uppercase tracking-wider cursor-pointer"
-                style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
+               
                 onClick={() => setIsDemoModalOpen(true)}
                 data-testid="button-demo"
               >
@@ -117,7 +117,7 @@ export function Navbar() {
                     key={link.label}
                     href={link.href}
                     className="block px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg tracking-wider cursor-pointer"
-                    style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
+                   
                     data-testid={`link-mobile-nav-${link.label.toLowerCase()}`}
                     onClick={(e) => handleNavClick(e, link)}
                   >
@@ -128,7 +128,7 @@ export function Navbar() {
                   <Button 
                     variant="ghost" 
                     className="w-full justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 uppercase tracking-wider cursor-pointer"
-                    style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
+                   
                     onClick={handleSignIn}
                     data-testid="button-mobile-signin"
                   >
@@ -136,7 +136,7 @@ export function Navbar() {
                   </Button>
                   <Button 
                     className="w-full justify-center bg-gray-900 hover:bg-gray-800 text-white uppercase tracking-wider cursor-pointer"
-                    style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
+                   
                     onClick={() => {
                       setIsDemoModalOpen(true);
                       setIsOpen(false);

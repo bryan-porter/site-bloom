@@ -42,17 +42,33 @@ export function BookDemoModal({ open, onOpenChange }: BookDemoModalProps) {
 
     setIsSubmitting(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch("/api/book-demo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    setIsSubmitting(false);
-    onOpenChange(false);
-    
-    toast({
-      title: "You're in! We'll be in touch.",
-      description: "Expect a free site audit and action plan within 48 hours.",
-    });
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.message || "Failed to submit");
+      }
 
-    setFormData({ name: "", email: "", website: "", message: "" });
+      onOpenChange(false);
+      toast({
+        title: "You're in! We'll be in touch.",
+        description: "Expect a free site audit and action plan within 48 hours.",
+      });
+      setFormData({ name: "", email: "", website: "", message: "" });
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        description: error instanceof Error ? error.message : "Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useMemo } from "react";
 import { BookDemoModal } from "@/components/BookDemoModal";
-import { useToast } from "@/hooks/use-toast";
+import { Link } from "wouter";
 
 function AsciiCharGrid() {
   const chars = useMemo(() => {
@@ -72,14 +72,9 @@ function AsciiCharGrid() {
 
 export function Hero() {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
-  const { toast } = useToast();
+  
 
-  const handleFreeAudit = () => {
-    toast({
-      title: "Free Site Audit",
-      description: "Our free audit tool is launching soon. Get on the list!",
-    });
-  };
+  
 
   return (
     <>
@@ -142,16 +137,7 @@ export function Hero() {
             >
               BLOOM MY SITE
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-gray-300 text-gray-700 hover:bg-gray-100 px-8 uppercase tracking-wider cursor-pointer"
-              style={{ fontFamily: "'VT323', monospace", fontSize: "16px" }}
-              onClick={handleFreeAudit}
-              data-testid="button-hero-demo"
-            >
-              FREE SITE AUDIT
-            </Button>
+            <Link href="/free-audit"><Button size="lg" variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-100 px-8 uppercase tracking-wider cursor-pointer" data-testid="button-hero-demo">FREE SITE AUDIT</Button></Link>
           </motion.div>
 
           <motion.p

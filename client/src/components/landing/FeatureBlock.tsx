@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Paintbrush, Gauge, LineChart } from "lucide-react";
+import { Paintbrush, Gauge, LineChart, Wrench, Zap, TrendingUp } from "lucide-react";
+
+const valueCards = [
+  { icon: Wrench, label: "FIX IT", desc: "Modern design & UX" },
+  { icon: Zap, label: "SPEED IT UP", desc: "Blazing performance" },
+  { icon: TrendingUp, label: "WATCH IT GROW", desc: "Conversion & SEO" },
+];
 
 const features = [
   {
@@ -40,7 +46,7 @@ export function FeaturesSection() {
       data-testid="section-features"
     >
       <div className="absolute inset-0 opacity-10">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
             <pattern id="grid-pattern" patternUnits="userSpaceOnUse" width="40" height="40">
               <circle cx="2" cy="2" r="1" fill="white" />
