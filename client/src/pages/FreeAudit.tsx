@@ -30,14 +30,19 @@ export default function FreeAudit() {
         body: JSON.stringify(data),
       });
 
-      if (response.ok) {
-        setIsSubmitted(true);
-        toast({ title: "Audit Request Submitted!", description: "We will send your free audit within 48 hours." });
-      } else {
-        throw new Error("Failed to submit");
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.message || "Failed to submit");
       }
+
+      setIsSubmitted(true);
+      toast({ title: "Audit Request Submitted!", description: "We will send your free audit within 48 hours." });
     } catch (error) {
-      toast({ title: "Something went wrong", description: "Please try again or email us directly.", variant: "destructive" });
+      toast({
+        title: "Something went wrong",
+        description: error instanceof Error ? error.message : "Please try again or email us directly.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }

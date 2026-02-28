@@ -16,10 +16,39 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    toast({ title: "Message Sent!", description: "We will get back to you within 24 hours." });
-    setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      website: formData.get("website"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.message || "Failed to submit");
+      }
+
+      toast({ title: "Message Sent!", description: "We will get back to you soon." });
+      form.reset();
+    } catch (error) {
+      toast({
+        title: "Something went wrong",
+        description: error instanceof Error ? error.message : "Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -36,19 +65,19 @@ export default function Contact() {
           <div className="grid md:grid-cols-2 gap-12">
             <div>
               <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
-              <p className="text-gray-600 mb-8">Fill out the form and our team will get back to you within 24 hours.</p>
+              <p className="text-gray-600 mb-8">Fill out the form and our team will get back to you soon.</p>
               <div className="space-y-6">
                 <div className="flex items-center gap-4"><Mail className="w-6 h-6 text-[#9333EA]" /><div><p className="font-semibold">Email</p><p className="text-gray-600">hello@sitebloom.com</p></div></div>
                 <div className="flex items-center gap-4"><MessageSquare className="w-6 h-6 text-[#9333EA]" /><div><p className="font-semibold">Live Chat</p><p className="text-gray-600">Available Mon-Fri 9am-6pm EST</p></div></div>
-                <div className="flex items-center gap-4"><Clock className="w-6 h-6 text-[#9333EA]" /><div><p className="font-semibold">Response Time</p><p className="text-gray-600">Usually within 24 hours</p></div></div>
+                <div className="flex items-center gap-4"><Clock className="w-6 h-6 text-[#9333EA]" /><div><p className="font-semibold">Response Time</p><p className="text-gray-600">Replies are sent soon</p></div></div>
               </div>
             </div>
             <div className="bg-gray-50 p-8 rounded-2xl">
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div><label className="block text-sm font-medium mb-2">Name</label><Input placeholder="Your name" required /></div>
-                <div><label className="block text-sm font-medium mb-2">Email</label><Input type="email" placeholder="you@example.com" required /></div>
-                <div><label className="block text-sm font-medium mb-2">Website URL</label><Input type="url" placeholder="https://yoursite.com" /></div>
-                <div><label className="block text-sm font-medium mb-2">Message</label><Textarea placeholder="How can we help you?" rows={4} required /></div>
+                <div><label className="block text-sm font-medium mb-2">Name</label><Input name="name" placeholder="Your name" required /></div>
+                <div><label className="block text-sm font-medium mb-2">Email</label><Input name="email" type="email" placeholder="you@example.com" required /></div>
+                <div><label className="block text-sm font-medium mb-2">Website URL</label><Input name="website" type="url" placeholder="https://yoursite.com" /></div>
+                <div><label className="block text-sm font-medium mb-2">Message</label><Textarea name="message" placeholder="How can we help you?" rows={4} required /></div>
                 <Button type="submit" className="w-full bg-[#9333EA] hover:bg-[#7C3AED] text-white" disabled={isSubmitting}>{isSubmitting ? "Sending..." : "Send Message"}</Button>
               </form>
             </div>

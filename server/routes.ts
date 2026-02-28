@@ -1,6 +1,55 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import type { Server } from "http";
+import nodemailer from "nodemailer";
+
+type SubmissionDetails = Record<string, string | undefined>;
+
+function getMailConfig() {
+  const gmailUser = process.env.GMAIL_USER;
+  const gmailAppPassword = process.env.GMAIL_APP_PASSWORD;
+  const mailTo = process.env.CONTACT_FORM_TO || gmailUser;
+
+  if (!gmailUser || !gmailAppPassword || !mailTo) {
+    return null;
+  }
+
+  return {
+    gmailUser,
+    gmailAppPassword,
+    mailTo,
+  };
+}
+
+async function sendSubmissionEmail(subject: string, details: SubmissionDetails) {
+  const mailConfig = getMailConfig();
+
+  if (!mailConfig) {
+    throw new Error(
+      "Email is not configured. Set GMAIL_USER, GMAIL_APP_PASSWORD, and optionally CONTACT_FORM_TO.",
+    );
+  }
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: mailConfig.gmailUser,
+      pass: mailConfig.gmailAppPassword,
+    },
+  });
+
+  const text = Object.entries(details)
+    .filter(([, value]) => value)
+    .map(([key, value]) => `${key}: ${value}`)
+    .join("\n");
+
+  await transporter.sendMail({
+    from: `"SiteBloom Forms" <${mailConfig.gmailUser}>`,
+    to: mailConfig.mailTo,
+    replyTo: details.email,
+    subject,
+    text,
+  });
+}
 
 export async function registerRoutes(
   httpServer: Server,
@@ -31,17 +80,23 @@ export async function registerRoutes(
         return res.status(400).json({ message: "Invalid website URL format" });
       }
 
-      // Log the audit request (in production, this would send an email or store in database)
-      console.log("Free Audit Request:", { websiteUrl, name, email, notes, timestamp: new Date().toISOString() });
+      await sendSubmissionEmail("New Free Audit Request", {
+        type: "Free Audit",
+        name,
+        email,
+        websiteUrl,
+        notes,
+        timestamp: new Date().toISOString(),
+      });
 
-      // Return success response
       return res.status(200).json({
         message: "Audit request submitted successfully",
         data: { websiteUrl, name, email }
       });
     } catch (error) {
       console.error("Error processing audit request:", error);
-      return res.status(500).json({ message: "Internal server error" });
+      const message = error instanceof Error ? error.message : "Internal server error";
+      return res.status(500).json({ message });
     }
   });
 
@@ -69,7 +124,14 @@ export async function registerRoutes(
         }
       }
 
-      console.log("Book Demo Request:", { name, email, website, message, timestamp: new Date().toISOString() });
+      await sendSubmissionEmail("New Book Demo Request", {
+        type: "Book Demo",
+        name,
+        email,
+        website,
+        message,
+        timestamp: new Date().toISOString(),
+      });
 
       return res.status(200).json({
         message: "Demo request submitted successfully",
@@ -77,7 +139,52 @@ export async function registerRoutes(
       });
     } catch (error) {
       console.error("Error processing demo request:", error);
-      return res.status(500).json({ message: "Internal server error" });
+      const message = error instanceof Error ? error.message : "Internal server error";
+      return res.status(500).json({ message });
+    }
+  });
+
+  // Contact page submission endpoint
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const { name, email, website, message } = req.body;
+
+      if (!name || !email || !message) {
+        return res.status(400).json({
+          message: "Missing required fields: name, email, and message are required"
+        });
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: "Invalid email format" });
+      }
+
+      if (website) {
+        try {
+          new URL(website);
+        } catch {
+          return res.status(400).json({ message: "Invalid website URL format" });
+        }
+      }
+
+      await sendSubmissionEmail("New Contact Form Message", {
+        type: "Contact",
+        name,
+        email,
+        website,
+        message,
+        timestamp: new Date().toISOString(),
+      });
+
+      return res.status(200).json({
+        message: "Contact request submitted successfully",
+        data: { name, email }
+      });
+    } catch (error) {
+      console.error("Error processing contact request:", error);
+      const message = error instanceof Error ? error.message : "Internal server error";
+      return res.status(500).json({ message });
     }
   });
 
