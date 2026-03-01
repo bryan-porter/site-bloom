@@ -24,6 +24,7 @@ export function BookDemoModal({ open, onOpenChange }: BookDemoModalProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     website: "",
     message: "",
   });
@@ -45,6 +46,7 @@ export function BookDemoModal({ open, onOpenChange }: BookDemoModalProps) {
     console.log("[forms:book-demo] submit started", {
       hasName: Boolean(formData.name),
       hasEmail: Boolean(formData.email),
+      hasPhone: Boolean(formData.phone),
       hasWebsite: Boolean(formData.website),
       hasMessage: Boolean(formData.message),
     });
@@ -71,7 +73,7 @@ export function BookDemoModal({ open, onOpenChange }: BookDemoModalProps) {
         title: "You're in! We'll be in touch.",
         description: "Expect a free site audit and action plan within 48 hours.",
       });
-      setFormData({ name: "", email: "", website: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", website: "", message: "" });
     } catch (error) {
       console.error("[forms:book-demo] submit failed", error);
       toast({
@@ -125,10 +127,21 @@ export function BookDemoModal({ open, onOpenChange }: BookDemoModalProps) {
             <Label htmlFor="website">Your Website URL</Label>
             <Input
               id="website"
-              placeholder="https://mybusiness.com"
+              placeholder="mybusiness.com or anything helpful"
               value={formData.website}
               onChange={(e) => setFormData({ ...formData, website: e.target.value })}
               data-testid="input-demo-company"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="phone">Phone Number</Label>
+            <Input
+              id="phone"
+              type="tel"
+              placeholder="(555) 123-4567"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              data-testid="input-demo-phone"
             />
           </div>
           <div className="space-y-2">

@@ -78,7 +78,7 @@ export async function registerRoutes(
       logSubmissionStep("free-audit", "request received", {
         bodyKeys: Object.keys(req.body || {}),
       });
-      const { websiteUrl, name, email, notes } = req.body;
+      const { websiteUrl, name, email, phone, notes } = req.body;
 
       // Validate required fields
       if (!websiteUrl || !name || !email) {
@@ -99,23 +99,17 @@ export async function registerRoutes(
         return res.status(400).json({ message: "Invalid email format" });
       }
 
-      // Validate URL format
-      try {
-        new URL(websiteUrl);
-      } catch {
-        logSubmissionStep("free-audit", "website URL validation failed", { websiteUrl });
-        return res.status(400).json({ message: "Invalid website URL format" });
-      }
-
       logSubmissionStep("free-audit", "validation passed", {
         name,
         email,
+        hasPhone: Boolean(phone),
         websiteUrl,
       });
       await sendSubmissionEmail("New Free Audit Request", {
         type: "Free Audit",
         name,
         email,
+        phone,
         websiteUrl,
         notes,
         timestamp: new Date().toISOString(),
@@ -138,7 +132,7 @@ export async function registerRoutes(
       logSubmissionStep("book-demo", "request received", {
         bodyKeys: Object.keys(req.body || {}),
       });
-      const { name, email, website, message } = req.body;
+      const { name, email, phone, website, message } = req.body;
 
       if (!name || !email) {
         logSubmissionStep("book-demo", "missing required fields", {
@@ -156,18 +150,10 @@ export async function registerRoutes(
         return res.status(400).json({ message: "Invalid email format" });
       }
 
-      if (website) {
-        try {
-          new URL(website);
-        } catch {
-          logSubmissionStep("book-demo", "website URL validation failed", { website });
-          return res.status(400).json({ message: "Invalid website URL format" });
-        }
-      }
-
       logSubmissionStep("book-demo", "validation passed", {
         name,
         email,
+        hasPhone: Boolean(phone),
         hasWebsite: Boolean(website),
         hasMessage: Boolean(message),
       });
@@ -175,6 +161,7 @@ export async function registerRoutes(
         type: "Book Demo",
         name,
         email,
+        phone,
         website,
         message,
         timestamp: new Date().toISOString(),
@@ -197,7 +184,7 @@ export async function registerRoutes(
       logSubmissionStep("contact", "request received", {
         bodyKeys: Object.keys(req.body || {}),
       });
-      const { name, email, website, message } = req.body;
+      const { name, email, phone, website, message } = req.body;
 
       if (!name || !email || !message) {
         logSubmissionStep("contact", "missing required fields", {
@@ -216,18 +203,10 @@ export async function registerRoutes(
         return res.status(400).json({ message: "Invalid email format" });
       }
 
-      if (website) {
-        try {
-          new URL(website);
-        } catch {
-          logSubmissionStep("contact", "website URL validation failed", { website });
-          return res.status(400).json({ message: "Invalid website URL format" });
-        }
-      }
-
       logSubmissionStep("contact", "validation passed", {
         name,
         email,
+        hasPhone: Boolean(phone),
         hasWebsite: Boolean(website),
         messageLength: typeof message === "string" ? message.length : 0,
       });
@@ -235,6 +214,7 @@ export async function registerRoutes(
         type: "Contact",
         name,
         email,
+        phone,
         website,
         message,
         timestamp: new Date().toISOString(),

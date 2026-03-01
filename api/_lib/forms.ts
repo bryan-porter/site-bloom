@@ -89,15 +89,6 @@ function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-function isValidUrl(value: string) {
-  try {
-    new URL(value);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
 function methodNotAllowed(res: JsonResponse) {
   return res.status(405).json({ message: "Method not allowed" });
 }
@@ -115,6 +106,7 @@ export async function handleContact(req: RequestLike, res: JsonResponse) {
 
     const name = typeof body.name === "string" ? body.name : "";
     const email = typeof body.email === "string" ? body.email : "";
+    const phone = typeof body.phone === "string" ? body.phone : "";
     const website = typeof body.website === "string" ? body.website : "";
     const message = typeof body.message === "string" ? body.message : "";
 
@@ -134,14 +126,10 @@ export async function handleContact(req: RequestLike, res: JsonResponse) {
       return res.status(400).json({ message: "Invalid email format" });
     }
 
-    if (website && !isValidUrl(website)) {
-      logSubmissionStep("contact", "website URL validation failed", { website });
-      return res.status(400).json({ message: "Invalid website URL format" });
-    }
-
     logSubmissionStep("contact", "validation passed", {
       name,
       email,
+      hasPhone: Boolean(phone),
       hasWebsite: Boolean(website),
       messageLength: message.length,
     });
@@ -150,6 +138,7 @@ export async function handleContact(req: RequestLike, res: JsonResponse) {
       type: "Contact",
       name,
       email,
+      phone,
       website,
       message,
       timestamp: new Date().toISOString(),
@@ -179,6 +168,7 @@ export async function handleBookDemo(req: RequestLike, res: JsonResponse) {
 
     const name = typeof body.name === "string" ? body.name : "";
     const email = typeof body.email === "string" ? body.email : "";
+    const phone = typeof body.phone === "string" ? body.phone : "";
     const website = typeof body.website === "string" ? body.website : "";
     const message = typeof body.message === "string" ? body.message : "";
 
@@ -197,14 +187,10 @@ export async function handleBookDemo(req: RequestLike, res: JsonResponse) {
       return res.status(400).json({ message: "Invalid email format" });
     }
 
-    if (website && !isValidUrl(website)) {
-      logSubmissionStep("book-demo", "website URL validation failed", { website });
-      return res.status(400).json({ message: "Invalid website URL format" });
-    }
-
     logSubmissionStep("book-demo", "validation passed", {
       name,
       email,
+      hasPhone: Boolean(phone),
       hasWebsite: Boolean(website),
       hasMessage: Boolean(message),
     });
@@ -213,6 +199,7 @@ export async function handleBookDemo(req: RequestLike, res: JsonResponse) {
       type: "Book Demo",
       name,
       email,
+      phone,
       website,
       message,
       timestamp: new Date().toISOString(),
@@ -243,6 +230,7 @@ export async function handleFreeAudit(req: RequestLike, res: JsonResponse) {
     const websiteUrl = typeof body.websiteUrl === "string" ? body.websiteUrl : "";
     const name = typeof body.name === "string" ? body.name : "";
     const email = typeof body.email === "string" ? body.email : "";
+    const phone = typeof body.phone === "string" ? body.phone : "";
     const notes = typeof body.notes === "string" ? body.notes : "";
 
     if (!websiteUrl || !name || !email) {
@@ -261,14 +249,10 @@ export async function handleFreeAudit(req: RequestLike, res: JsonResponse) {
       return res.status(400).json({ message: "Invalid email format" });
     }
 
-    if (!isValidUrl(websiteUrl)) {
-      logSubmissionStep("free-audit", "website URL validation failed", { websiteUrl });
-      return res.status(400).json({ message: "Invalid website URL format" });
-    }
-
     logSubmissionStep("free-audit", "validation passed", {
       name,
       email,
+      hasPhone: Boolean(phone),
       websiteUrl,
     });
 
@@ -276,6 +260,7 @@ export async function handleFreeAudit(req: RequestLike, res: JsonResponse) {
       type: "Free Audit",
       name,
       email,
+      phone,
       websiteUrl,
       notes,
       timestamp: new Date().toISOString(),

@@ -21,12 +21,14 @@ export default function FreeAudit() {
       websiteUrl: formData.get("websiteUrl"),
       name: formData.get("name"),
       email: formData.get("email"),
+      phone: formData.get("phone"),
       notes: formData.get("notes"),
     };
     console.log("[forms:free-audit] submit started", {
       hasWebsiteUrl: Boolean(data.websiteUrl),
       hasName: Boolean(data.name),
       hasEmail: Boolean(data.email),
+      hasPhone: Boolean(data.phone),
       hasNotes: Boolean(data.notes),
     });
 
@@ -109,8 +111,8 @@ export default function FreeAudit() {
                   <h3 className="text-2xl font-bold mb-6">Request Your Free Audit</h3>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Website URL <span className="text-red-500">*</span></label>
-                      <Input name="websiteUrl" type="url" placeholder="https://yourwebsite.com" required />
+                      <label className="block text-sm font-medium mb-2">Website <span className="text-red-500">*</span></label>
+                      <Input name="websiteUrl" placeholder="yourwebsite.com or anything helpful" required />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2">Your Name <span className="text-red-500">*</span></label>
@@ -119,6 +121,10 @@ export default function FreeAudit() {
                     <div>
                       <label className="block text-sm font-medium mb-2">Email Address <span className="text-red-500">*</span></label>
                       <Input name="email" type="email" placeholder="john@example.com" required />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Phone Number <span className="text-gray-400">(optional)</span></label>
+                      <Input name="phone" type="tel" placeholder="(555) 123-4567" />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2">Additional Notes <span className="text-gray-400">(optional)</span></label>

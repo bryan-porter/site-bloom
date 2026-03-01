@@ -23,12 +23,14 @@ export default function Contact() {
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
+      phone: formData.get("phone"),
       website: formData.get("website"),
       message: formData.get("message"),
     };
     console.log("[forms:contact] submit started", {
       hasName: Boolean(data.name),
       hasEmail: Boolean(data.email),
+      hasPhone: Boolean(data.phone),
       hasWebsite: Boolean(data.website),
       hasMessage: Boolean(data.message),
     });
@@ -89,7 +91,8 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div><label className="block text-sm font-medium mb-2">Name</label><Input name="name" placeholder="Your name" required /></div>
                 <div><label className="block text-sm font-medium mb-2">Email</label><Input name="email" type="email" placeholder="you@example.com" required /></div>
-                <div><label className="block text-sm font-medium mb-2">Website URL</label><Input name="website" type="url" placeholder="https://yoursite.com" /></div>
+                <div><label className="block text-sm font-medium mb-2">Phone Number</label><Input name="phone" type="tel" placeholder="(555) 123-4567" /></div>
+                <div><label className="block text-sm font-medium mb-2">Website</label><Input name="website" placeholder="yoursite.com or anything helpful" /></div>
                 <div><label className="block text-sm font-medium mb-2">Message</label><Textarea name="message" placeholder="How can we help you?" rows={4} required /></div>
                 <Button type="submit" className="w-full bg-[#9333EA] hover:bg-[#7C3AED] text-white" disabled={isSubmitting}>{isSubmitting ? "Sending..." : "Send Message"}</Button>
               </form>
