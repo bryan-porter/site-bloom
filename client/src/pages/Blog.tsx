@@ -4,21 +4,7 @@ import { Button } from "@/components/ui/button";
 import { BookDemoModal } from "@/components/BookDemoModal";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
-import redesignSignsHero from "@assets/blog/blog-hero-redesign-signs.png";
-import pageSpeedHero from "@assets/blog/blog-hero-page-speed.png";
-import mobileFirstHero from "@assets/blog/blog-hero-mobile-first.png";
-import seoFundamentalsHero from "@assets/blog/blog-hero-seo-fundamentals.png";
-import slowWebsiteCostHero from "@assets/blog/blog-hero-slow-website-cost.png";
-import croQuickWinsHero from "@assets/blog/blog-hero-cro-quick-wins.png";
-
-const posts = [
-  { title: "10 Signs Your Website Needs a Redesign", category: "Design", date: "Jan 15, 2025", readTime: "5 min", excerpt: "Your website is often the first impression customers have of your business. Learn the warning signs that it is time for a refresh.", image: redesignSignsHero },
-  { title: "How Page Speed Affects Your Bottom Line", category: "Performance", date: "Jan 10, 2025", readTime: "4 min", excerpt: "Every second counts. Discover the direct correlation between load times and conversion rates.", image: pageSpeedHero },
-  { title: "Mobile-First Design: Why It Matters in 2025", category: "Mobile", date: "Jan 5, 2025", readTime: "6 min", excerpt: "With mobile traffic dominating, your site must prioritize the mobile experience first.", image: mobileFirstHero },
-  { title: "SEO Fundamentals Every Business Owner Should Know", category: "SEO", date: "Dec 28, 2024", readTime: "8 min", excerpt: "Demystifying SEO: practical tips to improve your search visibility without technical expertise.", image: seoFundamentalsHero },
-  { title: "The True Cost of a Slow Website", category: "Performance", date: "Dec 20, 2024", readTime: "5 min", excerpt: "Calculate the revenue you are losing every day due to poor website performance.", image: slowWebsiteCostHero },
-  { title: "Conversion Rate Optimization: Quick Wins", category: "Growth", date: "Dec 15, 2024", readTime: "7 min", excerpt: "Simple changes you can make today to increase the percentage of visitors who become customers.", image: croQuickWinsHero },
-];
+import { blogPostPreviews } from "@/content/blogPosts";
 
 export default function Blog() {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
@@ -37,28 +23,40 @@ export default function Blog() {
           <h2 className="text-3xl font-bold text-center mb-4">Latest Articles</h2>
           <p className="text-gray-600 text-center mb-12">Practical advice from our team of web experts.</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post, i) => (
-              <article key={i} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="h-48 w-full object-cover"
-                  loading="lazy"
-                />
-                <div className="p-6">
-                  <span className="text-xs font-semibold text-[#9333EA] uppercase tracking-wider">{post.category}</span>
-                  <h3 className="text-xl font-semibold mt-2 mb-3">{post.title}</h3>
-                  <p className="text-gray-600 text-sm mb-4">{post.excerpt}</p>
-                  <div className="flex items-center justify-between text-gray-400 text-sm">
-                    <div className="flex items-center gap-4">
-                      <span className="flex items-center gap-1"><Calendar className="w-4 h-4" />{post.date}</span>
-                      <span className="flex items-center gap-1"><Clock className="w-4 h-4" />{post.readTime}</span>
+            {blogPostPreviews.map((post) => {
+              const card = (
+                <article className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow h-full">
+                  <img
+                    src={post.image}
+                    alt={post.heroAlt}
+                    className="h-48 w-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="p-6">
+                    <span className="text-xs font-semibold text-[#9333EA] uppercase tracking-wider">{post.category}</span>
+                    <h3 className="text-xl font-semibold mt-2 mb-3">{post.title}</h3>
+                    <p className="text-gray-600 text-sm mb-4">{post.excerpt}</p>
+                    <div className="flex items-center justify-between text-gray-400 text-sm">
+                      <div className="flex items-center gap-4">
+                        <span className="flex items-center gap-1"><Calendar className="w-4 h-4" />{post.date}</span>
+                        <span className="flex items-center gap-1"><Clock className="w-4 h-4" />{post.readTime}</span>
+                      </div>
+                      {post.slug ? <ArrowRight className="w-4 h-4 text-[#9333EA]" /> : <ArrowRight className="w-4 h-4" />}
                     </div>
-                    <ArrowRight className="w-4 h-4" />
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+
+              if (!post.slug) {
+                return <div key={post.title}>{card}</div>;
+              }
+
+              return (
+                <Link key={post.slug} href={`/blog/${post.slug}`} className="block h-full">
+                  {card}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

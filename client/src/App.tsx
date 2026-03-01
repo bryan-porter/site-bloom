@@ -19,6 +19,7 @@ import Pricing from "@/pages/Pricing";
 
 // Resource pages
 import Blog from "@/pages/Blog";
+import BlogPost from "@/pages/BlogPost";
 import CaseStudies from "@/pages/CaseStudies";
 import FreeAudit from "@/pages/FreeAudit";
 import SiteGrader from "@/pages/SiteGrader";
@@ -57,6 +58,9 @@ function Router() {
 
       {/* Resource pages */}
       <Route path="/blog" component={Blog} />
+      <Route path="/blog/:slug">
+        {(params) => <BlogPost slug={params.slug} />}
+      </Route>
       <Route path="/case-studies" component={CaseStudies} />
       <Route path="/free-audit" component={FreeAudit} />
       <Route path="/site-grader" component={SiteGrader} />
