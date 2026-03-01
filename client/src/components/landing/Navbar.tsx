@@ -8,8 +8,6 @@ import { useToast } from "@/hooks/use-toast";
 
 const navLinks = [
   { label: "SERVICES", href: "#features", hasDropdown: true, hasSection: true },
-  { label: "PRICING", href: "#pricing", hasDropdown: false, hasSection: false },
-  { label: "WORK", href: "#resources", hasDropdown: true, hasSection: false },
   { label: "RESULTS", href: "#testimonials", hasDropdown: false, hasSection: true },
 ];
 
