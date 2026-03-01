@@ -79,13 +79,13 @@ export function Hero() {
   return (
     <>
       <section 
-        className="relative min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white"
+        className="relative min-h-screen px-4 pt-24 pb-20 sm:px-6 lg:px-8 overflow-hidden bg-white flex items-start md:items-center"
         data-testid="section-hero"
       >
         <AsciiCharGrid />
         <div className="absolute inset-x-4 top-28 bottom-16 rounded-[2rem] bg-white/95 blur-2xl md:hidden pointer-events-none" />
 
-        <div className="relative max-w-4xl mx-auto text-center pt-16 z-10">
+        <div className="relative max-w-4xl mx-auto w-full text-center pt-8 md:pt-0 z-10">
           <motion.a
             href="#agents"
             onClick={(e) => {
