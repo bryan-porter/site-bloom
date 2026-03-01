@@ -1,45 +1,52 @@
 import { motion } from "framer-motion";
-import { Paintbrush, Gauge, Code, Smartphone, ShieldCheck, BarChart3 } from "lucide-react";
+import { Paintbrush, Gauge, DollarSign, Smartphone, ShieldCheck, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookDemoModal } from "@/components/BookDemoModal";
 import { useState } from "react";
+import { Link } from "wouter";
 
 const services = [
   {
     id: "redesign",
-    title: "Full-Site Redesign",
+    title: "Full Redesign",
     description: "From wireframe to launch. We tear down what's broken and rebuild your site with modern design, clear navigation, and conversion-focused layouts.",
     icon: Paintbrush,
+    href: "/services/full-redesign",
   },
   {
     id: "speed",
     title: "Speed Optimization",
     description: "Slow pages kill sales. We audit every bottleneck and deliver blazing-fast load times that keep visitors engaged and search engines happy.",
     icon: Gauge,
-  },
-  {
-    id: "development",
-    title: "Custom Development",
-    description: "Need something beyond templates? We build custom features, integrations, and functionality tailored to how your business actually works.",
-    icon: Code,
+    href: "/services/speed-optimization",
   },
   {
     id: "mobile",
     title: "Mobile Overhaul",
     description: "Over half your traffic is mobile. We make sure every tap, scroll, and checkout feels effortless on any screen size.",
     icon: Smartphone,
+    href: "/services/mobile-overhaul",
   },
   {
     id: "seo",
     title: "SEO & Visibility",
     description: "Beautiful sites that nobody finds are useless. We bake in technical SEO, structured data, and content strategy from day one.",
     icon: ShieldCheck,
+    href: "/services/seo-visibility",
   },
   {
     id: "analytics",
-    title: "Analytics & Growth",
+    title: "Analytics",
     description: "Data-driven decisions, not guesswork. We set up tracking, heatmaps, and dashboards so you know exactly what's working and what's not.",
     icon: BarChart3,
+    href: "/services/analytics",
+  },
+  {
+    id: "pricing",
+    title: "Pricing",
+    description: "Explore the engagement tiers, scope options, and deliverables available for your site transformation.",
+    icon: DollarSign,
+    href: "/pricing",
   },
 ];
 
@@ -87,27 +94,32 @@ export function AgentsGrid() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative bg-gray-50 rounded-lg p-6 border border-gray-200 hover:border-[#9333EA]/30 hover:bg-purple-50/50 transition-all duration-300 cursor-pointer"
+                className="group"
                 data-testid={`card-agent-${service.id}`}
               >
-                <div 
-                  className="w-12 h-12 rounded-lg bg-[#9333EA]/10 flex items-center justify-center mb-5 group-hover:bg-[#9333EA]/20 transition-colors duration-300"
-                  data-testid={`icon-agent-${service.id}`}
+                <Link
+                  href={service.href}
+                  className="block relative bg-gray-50 rounded-lg p-6 border border-gray-200 hover:border-[#9333EA]/30 hover:bg-purple-50/50 transition-all duration-300 cursor-pointer h-full"
                 >
-                  <service.icon className="w-6 h-6 text-[#9333EA]" />
-                </div>
-                <h3 
-                  className="text-xl font-semibold text-gray-900 mb-3"
-                  data-testid={`text-agent-title-${service.id}`}
-                >
-                  {service.title}
-                </h3>
-                <p 
-                  className="text-gray-500 leading-relaxed text-sm"
-                  data-testid={`text-agent-description-${service.id}`}
-                >
-                  {service.description}
-                </p>
+                  <div 
+                    className="w-12 h-12 rounded-lg bg-[#9333EA]/10 flex items-center justify-center mb-5 group-hover:bg-[#9333EA]/20 transition-colors duration-300"
+                    data-testid={`icon-agent-${service.id}`}
+                  >
+                    <service.icon className="w-6 h-6 text-[#9333EA]" />
+                  </div>
+                  <h3 
+                    className="text-xl font-semibold text-gray-900 mb-3"
+                    data-testid={`text-agent-title-${service.id}`}
+                  >
+                    {service.title}
+                  </h3>
+                  <p 
+                    className="text-gray-500 leading-relaxed text-sm"
+                    data-testid={`text-agent-description-${service.id}`}
+                  >
+                    {service.description}
+                  </p>
+                </Link>
               </motion.div>
             ))}
           </div>
