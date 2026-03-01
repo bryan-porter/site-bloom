@@ -40,10 +40,10 @@ function AsciiCharGrid() {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-40 md:opacity-100">
       <div 
         className="absolute inset-0"
-        style={{ fontFamily: "'VT323', monospace", fontSize: "12px", lineHeight: "1" }}
+        style={{ fontFamily: "'VT323', monospace", fontSize: "10px", lineHeight: "1" }}
       >
         {chars.map((item) => (
           <span
@@ -83,6 +83,7 @@ export function Hero() {
         data-testid="section-hero"
       >
         <AsciiCharGrid />
+        <div className="absolute inset-x-4 top-28 bottom-16 rounded-[2rem] bg-white/95 blur-2xl md:hidden pointer-events-none" />
 
         <div className="relative max-w-4xl mx-auto text-center pt-16 z-10">
           <motion.a
@@ -94,19 +95,19 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full border border-gray-200 text-gray-600 text-sm mb-8 hover:bg-gray-200 transition-colors cursor-pointer"
+            className="inline-flex max-w-full items-center gap-2 px-3 py-2 sm:px-4 bg-gray-100 rounded-full border border-gray-200 text-gray-600 text-sm mb-8 hover:bg-gray-200 transition-colors cursor-pointer"
             style={{ fontFamily: "'VT323', monospace", fontSize: "14px", letterSpacing: "0.05em" }}
             data-testid="badge-hero-announcement"
           >
             <span className="px-2 py-0.5 bg-gray-900 rounded text-white text-xs" style={{ fontFamily: "'VT323', monospace" }}>NEW</span>
-            SEE HOW WE TRANSFORM SITES &gt;
+            <span className="truncate">SEE HOW WE TRANSFORM SITES &gt;</span>
           </motion.a>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-medium text-gray-900 tracking-tight leading-[1.1] mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-gray-900 tracking-tight leading-[1.05] sm:leading-[1.1] mb-6"
             data-testid="text-hero-headline"
           >
             Your website should work harder.
@@ -116,7 +117,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed px-3 sm:px-0"
             data-testid="text-hero-subhead"
           >
             If it's slow, confusing, or ugly — <span className="text-gray-900 font-medium">we fix it.</span> Sitebloom turns underperforming websites into modern, high-converting digital storefronts.
