@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Paintbrush, Gauge, LineChart, Wrench, Zap, TrendingUp } from "lucide-react";
+import redesignImage from "@assets/what-we-do/feature-redesign.png";
+import performanceImage from "@assets/what-we-do/feature-performance.png";
+import growthImage from "@assets/what-we-do/feature-growth.png";
 
 const valueCards = [
   { icon: Wrench, label: "FIX IT", desc: "Modern design & UX" },
@@ -13,6 +16,7 @@ const features = [
     id: "redesign",
     label: "REDESIGN",
     icon: Paintbrush,
+    image: redesignImage,
     title: "Modern Redesign That Converts",
     description: "We strip out the clutter and rebuild your site with clean layouts, sharp visuals, and user flows engineered to turn visitors into customers.",
     highlights: ["Conversion-focused layouts", "Mobile-first design", "Brand-aligned visuals"],
@@ -21,6 +25,7 @@ const features = [
     id: "performance",
     label: "PERFORMANCE",
     icon: Gauge,
+    image: performanceImage,
     title: "Speed That Keeps Visitors Around",
     description: "Slow sites bleed traffic. We optimize every asset, script, and server call to deliver sub-2-second load times that search engines reward.",
     highlights: ["Core Web Vitals pass", "Sub-2s load times", "SEO boost"],
@@ -29,6 +34,7 @@ const features = [
     id: "growth",
     label: "GROWTH",
     icon: LineChart,
+    image: growthImage,
     title: "Built-In Growth Engine",
     description: "Every page is wired for results. From strategic CTAs to analytics-driven iteration, your site becomes a 24/7 revenue machine.",
     highlights: ["A/B tested CTAs", "Analytics dashboard", "Ongoing optimization"],
@@ -146,35 +152,15 @@ export function FeaturesSection() {
 
             <div className="relative">
               <div 
-                className="aspect-[4/3] bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 flex items-center justify-center overflow-hidden"
+                className="aspect-[4/3] bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 overflow-hidden"
                 data-testid={`container-feature-visual-${activeTab}`}
               >
-                <div className="relative z-10 p-8 w-full">
-                  <div className="w-full max-w-sm mx-auto">
-                    <div className="bg-white/10 rounded-lg border border-white/20 p-4 mb-4">
-                      <div className="flex items-center gap-2 mb-3">
-                        <div className="w-2 h-2 rounded-full bg-red-400" />
-                        <div className="w-2 h-2 rounded-full bg-yellow-400" />
-                        <div className="w-2 h-2 rounded-full bg-green-400" />
-                      </div>
-                      <div className="space-y-2">
-                        <div className="h-3 bg-white/20 rounded w-3/4" />
-                        <div className="h-3 bg-white/20 rounded w-1/2" />
-                        <div className="h-3 bg-white/40 rounded w-2/3" />
-                      </div>
-                    </div>
-                    <div className="bg-white/5 rounded-lg border border-white/20 p-4">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-300 to-pink-300" />
-                        <div className="flex-1">
-                          <div className="h-2.5 bg-white/30 rounded w-24 mb-1" />
-                          <div className="h-2 bg-white/20 rounded w-16" />
-                        </div>
-                        <span className="text-white text-xs" style={{ fontFamily: "'VT323', monospace" }}>98%</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <img
+                  src={activeFeature.image}
+                  alt={`${activeFeature.label.toLowerCase()} feature preview`}
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#9333EA]/25 via-transparent to-white/10 pointer-events-none" />
               </div>
             </div>
           </motion.div>
