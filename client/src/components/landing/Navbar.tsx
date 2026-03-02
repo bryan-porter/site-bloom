@@ -72,7 +72,7 @@ export function Navbar() {
               ))}
             </div>
 
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden md:hidden items-center gap-3">
               <Button 
                 variant="ghost" 
                 className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 uppercase tracking-wider cursor-pointer"
@@ -135,7 +135,7 @@ export function Navbar() {
                     {link.label}
                   </a>
                 ))}
-                <div className="pt-4 border-t border-gray-200 space-y-3">
+                <div className="hidden pt-4 border-t border-gray-200 space-y-3">
                   <Button 
                     variant="ghost" 
                     className="w-full justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 uppercase tracking-wider cursor-pointer"
