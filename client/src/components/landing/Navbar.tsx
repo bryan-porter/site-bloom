@@ -36,7 +36,12 @@ export function Navbar() {
   };
 
   const handleSignIn = () => {
-    setLocation("/signin");
+    setLocation("/signin#signin");
+    setIsOpen(false);
+  };
+
+  const handleSignUp = () => {
+    setLocation("/signin#signup");
     setIsOpen(false);
   };
 
@@ -76,6 +81,14 @@ export function Navbar() {
                 data-testid="button-signin"
               >
                 SIGN IN
+              </Button>
+              <Button
+                variant="outline"
+                className="uppercase tracking-wider cursor-pointer"
+                onClick={handleSignUp}
+                data-testid="button-signup"
+              >
+                SIGN UP
               </Button>
               <Button 
                 className="bg-gray-900 hover:bg-gray-800 text-white uppercase tracking-wider cursor-pointer"
@@ -131,6 +144,14 @@ export function Navbar() {
                     data-testid="button-mobile-signin"
                   >
                     SIGN IN
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="w-full justify-center uppercase tracking-wider cursor-pointer"
+                    onClick={handleSignUp}
+                    data-testid="button-mobile-signup"
+                  >
+                    SIGN UP
                   </Button>
                   <Button 
                     className="w-full justify-center bg-gray-900 hover:bg-gray-800 text-white uppercase tracking-wider cursor-pointer"

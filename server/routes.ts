@@ -1,8 +1,30 @@
 import type { Express } from "express";
 import type { Server } from "http";
+import { randomUUID } from "crypto";
 import nodemailer from "nodemailer";
+import { storage } from "./storage";
 
 type SubmissionDetails = Record<string, string | undefined>;
+type AuthSession = {
+  userId: string;
+  email: string;
+};
+
+const authSessions = new Map<string, AuthSession>();
+
+function getBearerToken(authorizationHeader?: string) {
+  if (!authorizationHeader) {
+    return null;
+  }
+
+  const [scheme, token] = authorizationHeader.split(" ");
+
+  if (scheme !== "Bearer" || !token) {
+    return null;
+  }
+
+  return token;
+}
 
 function logSubmissionStep(flow: string, step: string, details?: Record<string, unknown>) {
   if (details) {
@@ -72,6 +94,129 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+  app.post("/api/auth/signup", async (req, res) => {
+    try {
+      const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
+      const password = typeof req.body?.password === "string" ? req.body.password : "";
+
+      if (!email || !password) {
+        return res.status(400).json({ message: "Email and password are required." });
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: "Invalid email format." });
+      }
+
+      if (password.length < 8) {
+        return res.status(400).json({ message: "Password must be at least 8 characters." });
+      }
+
+      const existingUser = await storage.getUserByEmail(email);
+
+      if (existingUser) {
+        return res.status(409).json({ message: "An account with that email already exists." });
+      }
+
+      const user = await storage.createUser({
+        email,
+        password,
+      });
+      const token = randomUUID();
+
+      authSessions.set(token, {
+        userId: user.id,
+        email: user.email,
+      });
+
+      return res.status(201).json({
+        token,
+        user: {
+          email: user.email,
+        },
+      });
+    } catch (error) {
+      console.error("[auth:signup] request failed", error);
+      return res.status(500).json({ message: "Unable to create account." });
+    }
+  });
+
+  app.post("/api/auth/login", async (req, res) => {
+    try {
+      const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
+      const password = typeof req.body?.password === "string" ? req.body.password : "";
+
+      if (!email || !password) {
+        return res.status(400).json({ message: "Email and password are required." });
+      }
+
+      const user = await storage.getUserByEmail(email);
+
+      if (!user || user.password !== password) {
+        return res.status(401).json({ message: "Invalid email or password." });
+      }
+
+      const token = randomUUID();
+
+      authSessions.set(token, {
+        userId: user.id,
+        email: user.email,
+      });
+
+      return res.status(200).json({
+        token,
+        user: {
+          email: user.email,
+        },
+      });
+    } catch (error) {
+      console.error("[auth:login] request failed", error);
+      return res.status(500).json({ message: "Unable to sign in." });
+    }
+  });
+
+  app.get("/api/auth/session", async (req, res) => {
+    try {
+      const token = getBearerToken(req.headers.authorization);
+
+      if (!token) {
+        return res.status(401).json({ message: "Not signed in." });
+      }
+
+      const session = authSessions.get(token);
+
+      if (!session) {
+        return res.status(401).json({ message: "Session expired." });
+      }
+
+      const user = await storage.getUser(session.userId);
+
+      if (!user) {
+        authSessions.delete(token);
+        return res.status(401).json({ message: "Session expired." });
+      }
+
+      return res.status(200).json({
+        user: {
+          email: user.email,
+        },
+      });
+    } catch (error) {
+      console.error("[auth:session] request failed", error);
+      return res.status(500).json({ message: "Unable to validate session." });
+    }
+  });
+
+  app.post("/api/auth/logout", (req, res) => {
+    const token = getBearerToken(req.headers.authorization);
+
+    if (token) {
+      authSessions.delete(token);
+    }
+
+    return res.status(200).json({ success: true });
+  });
+
   // Free Audit submission endpoint
   app.post("/api/free-audit", async (req, res) => {
     try {
