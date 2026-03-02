@@ -1,16 +1,10 @@
 import type { Express } from "express";
 import type { Server } from "http";
-import { randomUUID } from "crypto";
+import { createHmac, timingSafeEqual } from "crypto";
 import nodemailer from "nodemailer";
-import { storage } from "./storage";
 
 type SubmissionDetails = Record<string, string | undefined>;
-type AuthSession = {
-  userId: string;
-  email: string;
-};
-
-const authSessions = new Map<string, AuthSession>();
+const AUTH_TOKEN_SECRET = process.env.AUTH_TOKEN_SECRET || "sitebloom-public-auth";
 
 function getBearerToken(authorizationHeader?: string) {
   if (!authorizationHeader) {
@@ -24,6 +18,54 @@ function getBearerToken(authorizationHeader?: string) {
   }
 
   return token;
+}
+
+function createAuthToken(email: string) {
+  const payload = JSON.stringify({
+    email,
+    issuedAt: Date.now(),
+  });
+  const encodedPayload = Buffer.from(payload, "utf8").toString("base64url");
+  const signature = createHmac("sha256", AUTH_TOKEN_SECRET)
+    .update(encodedPayload)
+    .digest("base64url");
+
+  return `${encodedPayload}.${signature}`;
+}
+
+function readEmailFromToken(token: string) {
+  const [encodedPayload, signature] = token.split(".");
+
+  if (!encodedPayload || !signature) {
+    return null;
+  }
+
+  const expectedSignature = createHmac("sha256", AUTH_TOKEN_SECRET)
+    .update(encodedPayload)
+    .digest("base64url");
+
+  const signatureBuffer = Buffer.from(signature);
+  const expectedBuffer = Buffer.from(expectedSignature);
+
+  if (
+    signatureBuffer.length !== expectedBuffer.length ||
+    !timingSafeEqual(signatureBuffer, expectedBuffer)
+  ) {
+    return null;
+  }
+
+  try {
+    const decodedPayload = Buffer.from(encodedPayload, "base64url").toString("utf8");
+    const parsed = JSON.parse(decodedPayload) as { email?: unknown };
+
+    if (typeof parsed.email !== "string" || !parsed.email) {
+      return null;
+    }
+
+    return parsed.email;
+  } catch {
+    return null;
+  }
 }
 
 function logSubmissionStep(flow: string, step: string, details?: Record<string, unknown>) {
@@ -111,28 +153,12 @@ export async function registerRoutes(
       if (password.length < 8) {
         return res.status(400).json({ message: "Password must be at least 8 characters." });
       }
-
-      const existingUser = await storage.getUserByEmail(email);
-
-      if (existingUser) {
-        return res.status(409).json({ message: "An account with that email already exists." });
-      }
-
-      const user = await storage.createUser({
-        email,
-        password,
-      });
-      const token = randomUUID();
-
-      authSessions.set(token, {
-        userId: user.id,
-        email: user.email,
-      });
+      const token = createAuthToken(email);
 
       return res.status(201).json({
         token,
         user: {
-          email: user.email,
+          email,
         },
       });
     } catch (error) {
@@ -150,23 +176,21 @@ export async function registerRoutes(
         return res.status(400).json({ message: "Email and password are required." });
       }
 
-      const user = await storage.getUserByEmail(email);
-
-      if (!user || user.password !== password) {
-        return res.status(401).json({ message: "Invalid email or password." });
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: "Invalid email format." });
       }
 
-      const token = randomUUID();
+      if (password.length < 8) {
+        return res.status(400).json({ message: "Password must be at least 8 characters." });
+      }
 
-      authSessions.set(token, {
-        userId: user.id,
-        email: user.email,
-      });
+      const token = createAuthToken(email);
 
       return res.status(200).json({
         token,
         user: {
-          email: user.email,
+          email,
         },
       });
     } catch (error) {
@@ -183,22 +207,15 @@ export async function registerRoutes(
         return res.status(401).json({ message: "Not signed in." });
       }
 
-      const session = authSessions.get(token);
+      const email = readEmailFromToken(token);
 
-      if (!session) {
-        return res.status(401).json({ message: "Session expired." });
-      }
-
-      const user = await storage.getUser(session.userId);
-
-      if (!user) {
-        authSessions.delete(token);
+      if (!email) {
         return res.status(401).json({ message: "Session expired." });
       }
 
       return res.status(200).json({
         user: {
-          email: user.email,
+          email,
         },
       });
     } catch (error) {
@@ -208,12 +225,6 @@ export async function registerRoutes(
   });
 
   app.post("/api/auth/logout", (req, res) => {
-    const token = getBearerToken(req.headers.authorization);
-
-    if (token) {
-      authSessions.delete(token);
-    }
-
     return res.status(200).json({ success: true });
   });
 
