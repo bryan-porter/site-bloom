@@ -72,10 +72,10 @@ export function Navbar() {
               ))}
             </div>
 
-            <div className="hidden md:hidden items-center gap-3">
+            <div className="hidden md:flex items-center gap-3">
               <Button 
                 variant="ghost" 
-                className="text-gray-600 hover:text-gray-900 hover:bg-gray-100 uppercase tracking-wider cursor-pointer"
+                className="hidden text-gray-600 hover:text-gray-900 hover:bg-gray-100 uppercase tracking-wider cursor-pointer"
                
                 onClick={handleSignIn}
                 data-testid="button-signin"
@@ -84,7 +84,7 @@ export function Navbar() {
               </Button>
               <Button
                 variant="outline"
-                className="uppercase tracking-wider cursor-pointer"
+                className="hidden uppercase tracking-wider cursor-pointer"
                 onClick={handleSignUp}
                 data-testid="button-signup"
               >
@@ -135,10 +135,10 @@ export function Navbar() {
                     {link.label}
                   </a>
                 ))}
-                <div className="hidden pt-4 border-t border-gray-200 space-y-3">
+                <div className="pt-4 border-t border-gray-200 space-y-3">
                   <Button 
                     variant="ghost" 
-                    className="w-full justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 uppercase tracking-wider cursor-pointer"
+                    className="hidden w-full justify-center text-gray-600 hover:text-gray-900 hover:bg-gray-100 uppercase tracking-wider cursor-pointer"
                    
                     onClick={handleSignIn}
                     data-testid="button-mobile-signin"
@@ -147,7 +147,7 @@ export function Navbar() {
                   </Button>
                   <Button
                     variant="outline"
-                    className="w-full justify-center uppercase tracking-wider cursor-pointer"
+                    className="hidden w-full justify-center uppercase tracking-wider cursor-pointer"
                     onClick={handleSignUp}
                     data-testid="button-mobile-signup"
                   >
