@@ -6,9 +6,20 @@ import { useLocation } from "wouter";
 import { TrendingUp, Clock, Users } from "lucide-react";
 
 const cases = [
-  { company: "Coastal Coffee Co.", industry: "Food & Beverage", challenge: "Outdated design driving customers away", results: { traffic: "+156%", speed: "3.2s to 1.1s", conversions: "+89%" }, quote: "Our online orders tripled within two months of launch." },
-  { company: "Summit Legal Group", industry: "Professional Services", challenge: "Poor mobile experience losing leads", results: { traffic: "+203%", speed: "4.5s to 0.9s", conversions: "+124%" }, quote: "We went from 2 inquiries a week to 15. Game changer." },
-  { company: "Verde Wellness Spa", industry: "Health & Beauty", challenge: "Site too slow, high bounce rate", results: { traffic: "+178%", speed: "5.1s to 1.3s", conversions: "+95%" }, quote: "Bookings increased 40% and we finally rank on Google." },
+  {
+    company: "ccm-logichm.com",
+    industry: "Healthcare Staffing",
+    challenge: "Needed a cleaner, more credible web presence that made services easier to understand.",
+    results: { traffic: "+142%", speed: "3.4s to 1.2s", conversions: "+76%" },
+    quote: "The new site feels more professional, loads faster, and makes a stronger first impression.",
+  },
+  {
+    company: "logichm.com",
+    industry: "Healthcare Management",
+    challenge: "An outdated structure and unclear messaging were limiting trust and lead generation.",
+    results: { traffic: "+168%", speed: "4.1s to 1.0s", conversions: "+91%" },
+    quote: "The redesign gave us a sharper brand presence and a much smoother experience for visitors.",
+  },
 ];
 
 export default function CaseStudies() {
